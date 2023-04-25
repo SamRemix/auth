@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import prisma from '../prisma'
 import { hash } from 'bcrypt'
-import { sign } from 'jsonwebtoken'
 import findUserByEmail from '../utils/findUserByEmail'
+import createToken from '../utils/createToken'
 
 const { SECRET } = process.env
 
@@ -130,7 +130,7 @@ const signUp = async ({ body }: Request, res: Response) => {
       }
     })
 
-    const token = sign(user.id, SECRET as string)
+    const token = createToken(user.id)
 
     res.status(200).json({ user, token })
   } catch (error: any) {

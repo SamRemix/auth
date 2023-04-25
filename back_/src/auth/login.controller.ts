@@ -1,9 +1,7 @@
 import { Request, Response } from 'express'
 import { compare } from 'bcrypt'
-import { sign } from 'jsonwebtoken'
 import findUserByEmail from '../utils/findUserByEmail'
-
-const { SECRET } = process.env
+import createToken from '../utils/createToken'
 
 const logIn = async ({ body }: Request, res: Response) => {
   const { email, password } = body
@@ -55,7 +53,7 @@ const logIn = async ({ body }: Request, res: Response) => {
       throw new Error('Your password is incorrect')
     }
 
-    const token = sign(user.id, SECRET as string)
+    const token = createToken(user.id)
 
     res.status(200).json({ user, token })
   } catch (error: any) {
