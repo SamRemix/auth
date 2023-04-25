@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
-import prisma from '../prisma'
 import { compare } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
+import findUserByEmail from '../utils/findUserByEmail'
 
 const { SECRET } = process.env
 
@@ -42,11 +42,7 @@ const logIn = async ({ body }: Request, res: Response) => {
     }
 
     // checks if email matches to an existing user
-    const user = await prisma.user.findUnique({
-      where: {
-        email
-      }
-    })
+    const user = await findUserByEmail(email)
 
     if (!user) {
       throw new Error('This email does not exist')

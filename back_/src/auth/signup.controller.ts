@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import prisma from '../prisma'
 import { hash } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
+import findUserByEmail from '../utils/findUserByEmail'
 
 const { SECRET } = process.env
 
@@ -51,12 +52,7 @@ const signUp = async ({ body }: Request, res: Response) => {
       throw new Error('Your name must not exceed 32 characters')
     }
 
-    // checks if email is already in use
-    const exists = await prisma.user.findUnique({
-      where: {
-        email
-      }
-    })
+    const exists = await findUserByEmail(email)
 
     if (exists) {
       throw new Error('This email is already in use')
