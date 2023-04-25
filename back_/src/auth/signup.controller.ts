@@ -3,6 +3,7 @@ import prisma from '../prisma'
 import { hash } from 'bcrypt'
 import isEmpty from '../utils/isEmpty'
 import findUserByEmail from '../utils/findUserByEmail'
+import isStrongPassword from '../utils/isStrongPassword'
 import createToken from '../utils/createToken'
 
 const signUp = async ({ body }: Request, res: Response) => {
@@ -39,56 +40,7 @@ const signUp = async ({ body }: Request, res: Response) => {
     }
 
     // checks if password is strong enough
-    type PasswordErrorProps = {
-      message: string,
-      invalidRegExps: string[]
-    }
-
-    const isStrongPassword = (password: string) => {
-      const error: PasswordErrorProps = {
-        message: '',
-        invalidRegExps: []
-      }
-
-      const regexps = [{
-        regExp: /^.{8,}/,
-        message: '8 characters'
-      }, {
-        regExp: /[A-Z]/,
-        message: '1 uppercase character'
-      }, {
-        regExp: /[a-z]/,
-        message: '1 lowercase character'
-      }, {
-        regExp: /\d/,
-        message: '1 number'
-      }, {
-        regExp: /[^a-zA-Z\d]/,
-        message: '1 special character'
-      }]
-
-      regexps.map(({ regExp, message }) => {
-        if (!password.match(regExp)) {
-          error.invalidRegExps.push(message)
-
-          if (error.invalidRegExps.length === 1) {
-            return error.message = `Your password must contain at least ${message}`
-          }
-
-          return error.message = 'Your password isn\'t strong enough'
-        }
-      })
-
-      return { passwordError: error }
-    }
-
     isStrongPassword(password)
-
-    const { passwordError } = isStrongPassword(password)
-
-    if (passwordError.message) {
-      throw new Error(passwordError.message)
-    }
 
     const hashedPassword = await hash(password, 10)
 
