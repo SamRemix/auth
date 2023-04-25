@@ -3,6 +3,7 @@ import prisma from '../prisma'
 import { hash } from 'bcrypt'
 import isEmpty from '../utils/isEmpty'
 import findUserByEmail from '../utils/findUserByEmail'
+import isEmail from '../utils/isEmail'
 import isStrongPassword from '../utils/isStrongPassword'
 import createToken from '../utils/createToken'
 
@@ -29,13 +30,7 @@ const signUp = async ({ body }: Request, res: Response) => {
     }
 
     // checks if email is valid
-    const isEmail = () => (
-      email
-        .toLowerCase()
-        .match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
-    )
-
-    if (!isEmail()) {
+    if (!isEmail(email)) {
       throw new Error('Your email is invalid')
     }
 
