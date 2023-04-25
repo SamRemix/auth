@@ -1,47 +1,16 @@
 import { Request, Response } from 'express'
 import prisma from '../prisma'
 import { hash } from 'bcrypt'
+import isEmpty from '../utils/isEmpty'
 import findUserByEmail from '../utils/findUserByEmail'
 import createToken from '../utils/createToken'
-
-const { SECRET } = process.env
 
 const signUp = async ({ body }: Request, res: Response) => {
   const { name, email, password } = body
 
   try {
     // checks if fields are empty
-    type ErrorProps = {
-      message: string,
-      emptyFields: string[]
-    }
-
-    const checkEmptyFields = (body: object) => {
-      const error: ErrorProps = {
-        message: '',
-        emptyFields: []
-      }
-
-      Object.entries(body).map(([key, value]) => {
-        if (!value || value.trim().length === 0) {
-          error.emptyFields.push(key)
-
-          if (error.emptyFields.length === 1) {
-            return error.message = `You must fill in the "${key}" field`
-          }
-
-          return error.message = 'You must fill all the fields'
-        }
-      })
-
-      return { emptyFieldsError: error }
-    }
-
-    const { emptyFieldsError } = checkEmptyFields({ name, email, password })
-
-    if (emptyFieldsError.message) {
-      throw new Error(emptyFieldsError.message)
-    }
+    isEmpty({ name, email, password })
 
     // checks name length
     if (name.trim().length < 3) {
