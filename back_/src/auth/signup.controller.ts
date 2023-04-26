@@ -12,7 +12,11 @@ const signUp = async ({ body }: Request, res: Response) => {
 
   try {
     // checks if fields are empty
-    isEmpty({ name, email, password })
+    const { fieldsError } = isEmpty({ name, email, password })
+
+    if (fieldsError) {
+      throw new Error(fieldsError)
+    }
 
     // checks name length
     if (name.trim().length < 3) {
@@ -35,7 +39,11 @@ const signUp = async ({ body }: Request, res: Response) => {
     }
 
     // checks if password is strong enough
-    isStrongPassword(password)
+    const { passwordError } = isStrongPassword(password)
+
+    if (passwordError) {
+      throw new Error(passwordError)
+    }
 
     const hashedPassword = await hash(password, 10)
 

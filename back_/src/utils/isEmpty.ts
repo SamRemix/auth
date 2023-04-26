@@ -14,9 +14,7 @@ const isEmpty = (body: { [key: string]: any }) => {
     }
   })
 
-  if (message) {
-    throw new Error(message)
-  }
+  return { fieldsError: message }
 }
 
 export default isEmpty

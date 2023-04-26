@@ -31,9 +31,7 @@ const isStrongPassword = (password: string) => {
     }
   })
 
-  if (message) {
-    throw new Error(message)
-  }
+  return { passwordError: message }
 }
 
 export default isStrongPassword

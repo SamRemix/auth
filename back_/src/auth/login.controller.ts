@@ -8,7 +8,11 @@ const logIn = async ({ body }: Request, res: Response) => {
   const { email, password } = body
   try {
     // checks if fields are empty
-    isEmpty({ email, password })
+    const { fieldsError } = isEmpty({ email, password })
+
+    if (fieldsError) {
+      throw new Error(fieldsError)
+    }
 
     // checks if email matches to an existing user
     const user = await findUserByEmail(email)
