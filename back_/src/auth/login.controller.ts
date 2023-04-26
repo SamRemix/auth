@@ -1,10 +1,10 @@
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import { compare } from 'bcrypt'
 import isEmpty from '../utils/isEmpty'
 import findUserByEmail from '../utils/findUserByEmail'
 import createToken from '../utils/createToken'
 
-const logIn = async ({ body }: Request, res: Response) => {
+const logIn = async ({ body }: Request, res: Response, next: NextFunction) => {
   const { email, password } = body
   try {
     // checks if fields are empty
@@ -31,8 +31,8 @@ const logIn = async ({ body }: Request, res: Response) => {
     const token = createToken(user.id)
 
     res.status(200).json({ user, token })
-  } catch (error: any) {
-    res.status(400).json({ message: error.message })
+  } catch (error) {
+    next(error)
   }
 }
 

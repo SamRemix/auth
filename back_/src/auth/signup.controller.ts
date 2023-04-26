@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import prisma from '../prisma'
 import { hash } from 'bcrypt'
 import isEmpty from '../utils/isEmpty'
@@ -7,7 +7,7 @@ import isEmail from '../utils/isEmail'
 import isStrongPassword from '../utils/isStrongPassword'
 import createToken from '../utils/createToken'
 
-const signUp = async ({ body }: Request, res: Response) => {
+const signUp = async ({ body }: Request, res: Response, next: NextFunction) => {
   const { name, email, password } = body
 
   try {
@@ -57,8 +57,8 @@ const signUp = async ({ body }: Request, res: Response) => {
     const token = createToken(user.id)
 
     res.status(200).json({ user, token })
-  } catch (error: any) {
-    res.status(400).json({ message: error.message })
+  } catch (error) {
+    next(error)
   }
 }
 
