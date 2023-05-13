@@ -5,6 +5,7 @@ import isEmail from '../utils/isEmail'
 import isEmpty from '../utils/isEmpty'
 import isStrongPassword from '../utils/isStrongPassword'
 import createToken from '../utils/createToken'
+import checkLength from '../utils/checkLength'
 
 const signUpService = async (newUser: any) => {
   const { name, email, password } = newUser
@@ -15,13 +16,12 @@ const signUpService = async (newUser: any) => {
       throw new Error(fieldsError)
     }
 
-    if (name.trim().length < 3) {
-      throw new Error('Your name must contain at least 3 characters')
-    }
-
-    if (name.length > 32) {
-      throw new Error('Your name must not exceed 32 characters')
-    }
+    checkLength({
+      string: name,
+      min: 3,
+      max: 32,
+      prefix: 'Your name'
+    })
 
     const exists = await findUserByEmail(email)
 
