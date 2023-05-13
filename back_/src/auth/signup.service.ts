@@ -1,7 +1,7 @@
-import { hash } from 'bcrypt'
 import prisma from '../prisma'
 
-// utils
+import { hash } from 'bcrypt'
+
 import isEmpty from '../utils/isEmpty'
 import checkLength from '../utils/checkLength'
 import findUserByEmail from '../utils/findUserByEmail'

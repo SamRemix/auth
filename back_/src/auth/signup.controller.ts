@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
+
 import signUpService from './signup.service'
 
 const signUp = async ({ body }: Request, res: Response, next: NextFunction) => {

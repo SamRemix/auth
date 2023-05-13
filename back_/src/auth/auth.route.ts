@@ -1,4 +1,5 @@
 import { Router } from 'express'
+
 import signUp from './signup.controller'
 import logIn from './login.controller'
 

@@ -1,7 +1,8 @@
-import { compare } from "bcrypt"
-import createToken from "../utils/createToken"
-import findUserByEmail from "../utils/findUserByEmail"
-import isEmpty from "../utils/isEmpty"
+import { compare } from 'bcrypt'
+
+import createToken from '../utils/createToken'
+import findUserByEmail from '../utils/findUserByEmail'
+import isEmpty from '../utils/isEmpty'
 
 const logInService = async (currentUser: any) => {
   const { email, password } = currentUser
