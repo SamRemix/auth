@@ -1,20 +1,22 @@
 const isEmpty = (body: { [key: string]: any }) => {
   let emptyFields: string[] = []
-  let message = ''
+  let error = ''
 
   Object.entries(body).map(([key, value]) => {
     if (!value || value.trim().length === 0) {
       emptyFields.push(key)
 
       if (emptyFields.length === 1) {
-        return message = `You must fill in the "${key}" field`
+        return error = `You must fill in the "${key}" field`
       }
 
-      return message = 'You must fill all the fields'
+      error = 'You must fill all the fields'
     }
   })
 
-  return { fieldsError: message }
+  if (error) {
+    throw new Error(error)
+  }
 }
 
 export default isEmpty

@@ -1,25 +1,23 @@
 import { hash } from 'bcrypt'
 import prisma from '../prisma'
+
+// utils
+import isEmpty from '../utils/isEmpty'
+import checkLength from '../utils/checkLength'
 import findUserByEmail from '../utils/findUserByEmail'
 import isEmail from '../utils/isEmail'
-import isEmpty from '../utils/isEmpty'
 import isStrongPassword from '../utils/isStrongPassword'
 import createToken from '../utils/createToken'
-import checkLength from '../utils/checkLength'
 
 const signUpService = async (newUser: any) => {
   const { name, email, password } = newUser
-  try {
-    const { fieldsError } = isEmpty({ name, email, password })
 
-    if (fieldsError) {
-      throw new Error(fieldsError)
-    }
+  try {
+    isEmpty({ name, email, password })
 
     checkLength({
       string: name,
-      min: 3,
-      max: 32,
+      range: [3, 32],
       prefix: 'Your name'
     })
 
@@ -29,29 +27,24 @@ const signUpService = async (newUser: any) => {
       throw new Error('This email is already in use')
     }
 
-    if (!isEmail(email)) {
-      throw new Error('Your email is invalid')
-    }
+    isEmail(email)
 
-    const { passwordError } = isStrongPassword(password)
-
-    if (passwordError) {
-      throw new Error(passwordError)
-    }
+    isStrongPassword(password)
 
     const hashedPassword = await hash(password, 10)
 
     const user = await prisma.user.create({
       data: {
-        ...newUser, password: hashedPassword
+        ...newUser,
+        password: hashedPassword
       }
     })
 
     const token = createToken(user.id)
 
     return { user, token }
-  } catch (error: any) {
-    throw new Error(error)
+  } catch ({ message }: any) {
+    throw new Error(message)
   }
 }
 

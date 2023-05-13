@@ -1,17 +1,16 @@
 type CheckLengthProps = {
   string: string,
-  min: number,
-  max: number,
-  prefix: string
+  range: number[],
+  prefix?: string
 }
 
-const checkLength = ({ string, min, max, prefix }: CheckLengthProps) => {
-  if (string.trim().length < min) {
-    throw new Error(`${prefix} must contain at least ${min} character${min === 1 ? '' : 's'}`)
+const checkLength = ({ string, range, prefix = 'The field' }: CheckLengthProps) => {
+  if (string.trim().length < range[0]) {
+    throw new Error(`${prefix} must contain at least ${range[0]} character${range[0] === 1 ? '' : 's'}`)
   }
 
-  if (string.trim().length > max) {
-    throw new Error(`${prefix} must not exceed ${max} characters`)
+  if (string.trim().length > range[1]) {
+    throw new Error(`${prefix} must not exceed ${range[1]} characters`)
   }
 }
 

@@ -1,6 +1,6 @@
 const isStrongPassword = (password: string) => {
   let invalidRegExps: string[] = []
-  let message = ''
+  let error = ''
 
   const regExps = [{
     regExp: /^.{8,}/,
@@ -24,14 +24,16 @@ const isStrongPassword = (password: string) => {
       invalidRegExps.push(condition)
 
       if (invalidRegExps.length === 1) {
-        return message = `Your password must contain at least ${condition}`
+        return error = `Your password must contain at least ${condition}`
       }
 
-      return message = 'Your password isn\'t strong enough'
+      error = 'Your password isn\'t strong enough'
     }
   })
 
-  return { passwordError: message }
+  if (error) {
+    throw new Error(error)
+  }
 }
 
 export default isStrongPassword
