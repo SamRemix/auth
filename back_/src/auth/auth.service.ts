@@ -1,6 +1,7 @@
 import prisma from '../prisma'
 
 import { hash } from 'bcrypt'
+import { compare } from 'bcrypt'
 
 import isEmpty from '../utils/isEmpty'
 import checkLength from '../utils/checkLength'
@@ -9,7 +10,13 @@ import isEmail from '../utils/isEmail'
 import isStrongPassword from '../utils/isStrongPassword'
 import createToken from '../utils/createToken'
 
-const signUpService = async (newUser: any) => {
+type NewUserProps = {
+  name: string,
+  email: string,
+  password: string
+}
+
+export const signupService = async (newUser: NewUserProps) => {
   const { name, email, password } = newUser
 
   try {
@@ -40,12 +47,45 @@ const signUpService = async (newUser: any) => {
       }
     })
 
-    const token = createToken(user.id)
-
-    return { user, token }
+    return {
+      user,
+      token: createToken(user.id),
+      message: 'Successfully registered 🔥'
+    }
   } catch ({ message }: any) {
     throw new Error(message)
   }
 }
 
-export default signUpService
+type CurrentUserProps = {
+  email: string,
+  password: string
+}
+
+export const loginService = async (currentUser: CurrentUserProps) => {
+  const { email, password } = currentUser
+
+  try {
+    isEmpty({ email, password })
+
+    const user = await findUserByEmail(email)
+
+    if (!user) {
+      throw new Error('This email does not exist')
+    }
+
+    const match = await compare(password, user.password)
+
+    if (!match) {
+      throw new Error('Your password is incorrect')
+    }
+
+    return {
+      user,
+      token: createToken(user.id),
+      message: `Hi ${user.name}, welcome back! 🤘`
+    }
+  } catch ({ message }: any) {
+    throw new Error(message)
+  }
+}

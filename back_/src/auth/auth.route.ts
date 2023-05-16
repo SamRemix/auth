@@ -1,10 +1,9 @@
 import { Router } from 'express'
 
-import signUp from './signup.controller'
-import logIn from './login.controller'
+import { signup, login } from './auth.controller'
 
 export const router = Router()
 
 router
-  .post('/sign-up', signUp)
-  .post('/log-in', logIn)
+  .post('/sign-up', signup)
+  .post('/log-in', login)
