@@ -4,10 +4,10 @@ import AuthController from './auth.controller'
 
 const authRouter = Router()
 
-const authController = new AuthController()
+const { signup, login } = new AuthController()
 
 authRouter
-  .post('/signup', authController.signup)
-  .post('/login', authController.login)
+  .post('/signup', signup)
+  .post('/login', login)
 
 export default authRouter

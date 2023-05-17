@@ -4,12 +4,12 @@ import UsersController from './users.controller'
 
 const usersRouter = Router()
 
-const usersController = new UsersController()
+const { findAll, findOne, update, remove } = new UsersController()
 
 usersRouter
-  .get('/', usersController.findAll)
-  .get('/:id', usersController.findOne)
-  .put('/:id', usersController.update)
-  .delete('/:id', usersController.remove)
+  .get('/', findAll)
+  .get('/:id', findOne)
+  .put('/:id', update)
+  .delete('/:id', remove)
 
 export default usersRouter
