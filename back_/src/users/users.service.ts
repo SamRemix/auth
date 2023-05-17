@@ -1,10 +1,12 @@
-import { compare, hash } from 'bcrypt'
 import prisma from '../prisma'
+
+import { compare, hash } from 'bcrypt'
+
 import checkLength from '../utils/checkLength'
 import findUserByEmail from '../utils/findUserByEmail'
 import isEmail from '../utils/isEmail'
-import isEmpty from '../utils/isEmpty'
 import isStrongPassword from '../utils/isStrongPassword'
+import isValidId from '../utils/isValidId'
 
 type NewUserDataProps = {
   name: string,
@@ -16,11 +18,17 @@ type NewUserDataProps = {
 class UsersService {
   findAll = async () => {
     try {
-      return await prisma.user.findMany({
+      const users = await prisma.user.findMany({
         orderBy: {
           name: 'asc'
         }
       })
+
+      if (!users) {
+        throw new Error('Users not found')
+      }
+
+      return users
     } catch ({ message }: any) {
       throw new Error(message)
     }
@@ -28,11 +36,17 @@ class UsersService {
 
   findOne = async (id: string) => {
     try {
-      return await prisma.user.findUnique({
+      const user = await prisma.user.findUnique({
         where: {
           id
         }
       })
+
+      if (!user) {
+        throw new Error('User not found')
+      }
+
+      return user
     } catch ({ message }: any) {
       throw new Error(message)
     }
@@ -113,6 +127,12 @@ class UsersService {
 
   remove = async (id: string) => {
     try {
+      await isValidId({
+        id,
+        model: 'user',
+        error: 'User not found'
+      })
+
       return await prisma.user.delete({
         where: {
           id
