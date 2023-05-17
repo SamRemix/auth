@@ -20,12 +20,12 @@ class UsersService {
     try {
       const users = await prisma.user.findMany({
         orderBy: {
-          name: 'asc'
+          createdAt: 'asc'
         }
       })
 
-      if (!users) {
-        throw new Error('Users not found')
+      if (users.length === 0) {
+        throw new Error('No users found')
       }
 
       return users
