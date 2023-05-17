@@ -13,6 +13,18 @@ class UsersService {
     }
   }
 
+  findOne = async (id: string) => {
+    try {
+      return await prisma.user.findUnique({
+        where: {
+          id
+        }
+      })
+    } catch ({ message }: any) {
+      throw new Error(message)
+    }
+  }
+
   remove = async (id: string) => {
     try {
       return await prisma.user.delete({

@@ -15,6 +15,16 @@ class UsersController {
     }
   }
 
+  findOne = async ({ params }: Request, res: Response, next: NextFunction) => {
+    try {
+      const user = await usersService.findOne(params.id)
+
+      res.status(200).json(user)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   remove = async ({ params }: Request, res: Response, next: NextFunction) => {
     try {
       const user = await usersService.remove(params.id)
