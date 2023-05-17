@@ -1,7 +1,8 @@
 import express, { json } from 'express'
 
-import { router as authRouter } from './auth/auth.route'
-import { router as usersRouter } from './users/users.route'
+import authRouter from './auth/auth.route'
+import usersRouter from './users/users.route'
+
 import errorHandler from './middlewares/errorHandler'
 
 const app = express()

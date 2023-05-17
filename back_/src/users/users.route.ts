@@ -1,7 +1,11 @@
 import { Router } from 'express'
 
-import { findAll } from './users.controller'
+import UsersController from './users.controller'
 
-export const router = Router()
+const usersRouter = Router()
 
-router.get('/', findAll)
+const usersController = new UsersController()
+
+usersRouter.get('/', usersController.findAll)
+
+export default usersRouter

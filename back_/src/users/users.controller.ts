@@ -1,13 +1,19 @@
 import { NextFunction, Request, Response } from 'express'
 
-import { findAllService } from './users.service'
+import UsersService from './users.service'
 
-export const findAll = async (_req: Request, res: Response, next: NextFunction) => {
-  try {
-    const users = await findAllService()
+const usersService = new UsersService()
 
-    res.status(200).json(users)
-  } catch (error) {
-    next(error)
+class UsersController {
+  findAll = async (_req: Request, res: Response, next: NextFunction) => {
+    try {
+      const users = await usersService.findAll()
+
+      res.status(200).json(users)
+    } catch (error) {
+      next(error)
+    }
   }
 }
+
+export default UsersController
