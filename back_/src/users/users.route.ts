@@ -9,6 +9,7 @@ const usersController = new UsersController()
 usersRouter
   .get('/', usersController.findAll)
   .get('/:id', usersController.findOne)
+  .put('/:id', usersController.update)
   .delete('/:id', usersController.remove)
 
 export default usersRouter

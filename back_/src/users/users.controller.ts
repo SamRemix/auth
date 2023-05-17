@@ -25,6 +25,16 @@ class UsersController {
     }
   }
 
+  update = async ({ params, body }: Request, res: Response, next: NextFunction) => {
+    try {
+      const user = await usersService.update(params.id, body)
+
+      res.status(200).json(user)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   remove = async ({ params }: Request, res: Response, next: NextFunction) => {
     try {
       const user = await usersService.remove(params.id)
