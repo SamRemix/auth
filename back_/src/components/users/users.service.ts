@@ -6,7 +6,6 @@ import checkLength from '../../utils/checkLength'
 import findUserByEmail from '../../utils/findUserByEmail'
 import isEmail from '../../utils/isEmail'
 import isStrongPassword from '../../utils/isStrongPassword'
-import isValidId from '../../utils/isValidId'
 
 type NewUserDataProps = {
   name: string,
@@ -127,12 +126,6 @@ class UsersService {
 
   remove = async (id: string) => {
     try {
-      await isValidId({
-        id,
-        model: 'user',
-        error: 'User not found'
-      })
-
       return await prisma.user.delete({
         where: {
           id

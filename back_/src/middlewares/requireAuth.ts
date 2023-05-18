@@ -1,7 +1,7 @@
-import prisma from '../prisma'
-
 import { Request, Response, NextFunction } from 'express'
 import { verify } from 'jsonwebtoken'
+
+import findUserById from '../utils/findUserById'
 
 const requireAuth = async ({ headers }: Request, res: Response, next: NextFunction) => {
   const { authorization } = headers
@@ -16,11 +16,7 @@ const requireAuth = async ({ headers }: Request, res: Response, next: NextFuncti
   try {
     const decoded = verify(token, process.env.SECRET as string) as string
 
-    const { id } = await prisma.user.findUnique({
-      where: {
-        id: decoded
-      }
-    }) as { id: string }
+    const { id } = await findUserById(decoded)
 
     res.locals.user = id
 
