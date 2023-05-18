@@ -10,10 +10,9 @@ const errorHandler = (err: any, _req: Request, res: Response, _next: NextFunctio
     return res.status(400).json({ code, message: meta?.cause || 'This error is unhandled' })
 
     /**
-     * > npx prisma db push
-     * EPERM: operation not permitted
-     * npm uninstall @prisma/client
-     * npm i @prisma/client
+     * when i run command 'npx prisma db push' in terminal
+     * and i get the error 'EPERM: operation not permitted'
+     * reinstall @prisma/client dependency
      */
   }
 

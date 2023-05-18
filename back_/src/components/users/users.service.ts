@@ -3,7 +3,7 @@ import prisma from '../../prisma'
 import { compare, hash } from 'bcrypt'
 
 import checkLength from '../../utils/checkLength'
-import findUserByEmail from '../../utils/findUserByEmail'
+import findUser from '../../utils/findUser'
 import isEmail from '../../utils/isEmail'
 import isStrongPassword from '../../utils/isStrongPassword'
 
@@ -78,7 +78,7 @@ class UsersService {
           throw new Error('This email is already yours')
         }
 
-        const exists = await findUserByEmail(email)
+        const exists = await findUser({ email })
 
         if (exists) {
           throw new Error('This email is already in use')

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { verify } from 'jsonwebtoken'
 
-import findUserById from '../utils/findUserById'
+import findUser from '../utils/findUser'
 
 const requireAuth = async ({ headers }: Request, res: Response, next: NextFunction) => {
   const { authorization } = headers
@@ -14,14 +14,18 @@ const requireAuth = async ({ headers }: Request, res: Response, next: NextFuncti
   const token = authorization.split(' ')[1]
 
   try {
-    const decoded = verify(token, process.env.SECRET as string) as string
+    const decoded = verify(token, process.env.SECRET as string) as any
 
-    const { id } = await findUserById(decoded)
+    const { id } = await findUser({ id: decoded })
 
+    /**
+     * create 'user' property in res.locals object and store user id in it
+     * then i can access to it in requireAdmin middleware for admin permission
+     */
     res.locals.user = id
 
     next()
-  } catch ({ message }: any) {
+  } catch (error) {
     res.status(401).json({ message: 'Request isn\'t authorized' })
   }
 }

@@ -5,7 +5,7 @@ import { sign } from 'jsonwebtoken'
 
 import isEmpty from '../../utils/isEmpty'
 import checkLength from '../../utils/checkLength'
-import findUserByEmail from '../../utils/findUserByEmail'
+import findUser from '../../utils/findUser'
 import isEmail from '../../utils/isEmail'
 import isStrongPassword from '../../utils/isStrongPassword'
 
@@ -35,7 +35,7 @@ class AuthService {
         prefix: 'Your name'
       })
 
-      const exists = await findUserByEmail(email)
+      const exists = await findUser({ email })
 
       if (exists) {
         throw new Error('This email is already in use')
@@ -70,7 +70,7 @@ class AuthService {
     try {
       isEmpty({ email, password })
 
-      const user = await findUserByEmail(email)
+      const user = await findUser({ email })
 
       if (!user) {
         throw new Error('This email does not exist')

@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from 'express'
 
-import findUserById from '../utils/findUserById'
+import findUser from '../utils/findUser'
 
 const requireAdmin = async (_req: Request, res: Response, next: NextFunction) => {
   try {
-    const { role } = await findUserById(res.locals.user)
+    // res.locals.user is defined in requireAuth middleware
+    const { role } = await findUser({ id: res.locals.user })
 
     if (role !== 'ADMIN') {
       throw new Error('You don\'t have permission')
