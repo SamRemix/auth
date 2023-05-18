@@ -1,12 +1,12 @@
-import prisma from '../prisma'
+import prisma from '../../prisma'
 
 import { compare, hash } from 'bcrypt'
 
-import checkLength from '../utils/checkLength'
-import findUserByEmail from '../utils/findUserByEmail'
-import isEmail from '../utils/isEmail'
-import isStrongPassword from '../utils/isStrongPassword'
-import isValidId from '../utils/isValidId'
+import checkLength from '../../utils/checkLength'
+import findUserByEmail from '../../utils/findUserByEmail'
+import isEmail from '../../utils/isEmail'
+import isStrongPassword from '../../utils/isStrongPassword'
+import isValidId from '../../utils/isValidId'
 
 type NewUserDataProps = {
   name: string,

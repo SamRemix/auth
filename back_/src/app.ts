@@ -1,7 +1,7 @@
 import express, { json } from 'express'
 
-import authRouter from './auth/auth.route'
-import usersRouter from './users/users.route'
+import authRouter from './components/auth/auth.route'
+import usersRouter from './components/users/users.route'
 
 import errorHandler from './middlewares/errorHandler'
 

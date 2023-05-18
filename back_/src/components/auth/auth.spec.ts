@@ -1,6 +1,6 @@
 import request from 'supertest'
 
-import app from '../app'
+import app from '../../app'
 
 const tester = {
   id: '643d66769fcf9d57b5864eea',

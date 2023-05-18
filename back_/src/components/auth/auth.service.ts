@@ -1,13 +1,13 @@
-import prisma from '../prisma'
+import prisma from '../../prisma'
 
 import { hash, compare } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
 
-import isEmpty from '../utils/isEmpty'
-import checkLength from '../utils/checkLength'
-import findUserByEmail from '../utils/findUserByEmail'
-import isEmail from '../utils/isEmail'
-import isStrongPassword from '../utils/isStrongPassword'
+import isEmpty from '../../utils/isEmpty'
+import checkLength from '../../utils/checkLength'
+import findUserByEmail from '../../utils/findUserByEmail'
+import isEmail from '../../utils/isEmail'
+import isStrongPassword from '../../utils/isStrongPassword'
 
 const { SECRET } = process.env as { SECRET: string }
 
