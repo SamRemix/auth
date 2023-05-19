@@ -1,46 +1,46 @@
-import request from 'supertest'
-
+import prisma from '../../prisma'
 import app from '../../app'
 
+import request from 'supertest'
+
+import UsersService from '../users/users.service'
+
+const usersService = new UsersService()
+
 const tester = {
-  id: '643d66769fcf9d57b5864eea',
   name: 'Tester',
   email: 'tester@test.com',
   password: 'Tester123!'
 }
 
-describe('signup', () => {
-  afterAll(async () => {
-    await request(app)
-      .delete(`/users/${tester.id}`)
-  })
+afterAll(async () => {
+  const { id } = await prisma.user.findUnique({
+    where: {
+      email: 'tester@test.com'
+    }
+  }) as { id: string }
 
-  it('create a new user', async () => {
-    const { status } = await request(app)
+  await usersService.remove(id)
+})
+
+describe('POST /auth/signup', () => {
+  it('sign up', async () => {
+    const { status, body } = await request(app)
       .post('/auth/signup')
       .send(tester)
 
-    expect(status).toBe(200)
+    expect(status).toEqual(200)
+    expect(body.user.name).toEqual(tester.name)
   })
 })
 
-describe('login', () => {
-  beforeAll(async () => {
-    await request(app)
-      .post('/auth/signup')
-      .send(tester)
-  })
-
-  afterAll(async () => {
-    await request(app)
-      .delete(`/users/${tester.id}`)
-  })
-
-  it('return user', async () => {
-    const { status } = await request(app)
+describe('POST /auth/login', () => {
+  it('log in', async () => {
+    const { status, body } = await request(app)
       .post('/auth/login')
       .send(tester)
 
     expect(status).toBe(200)
+    expect(body.user.name).toEqual(tester.name)
   })
 })

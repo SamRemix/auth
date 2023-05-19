@@ -16,7 +16,7 @@ const requireAuth = async ({ headers }: Request, res: Response, next: NextFuncti
   try {
     const decoded = verify(token, process.env.SECRET as string) as any
 
-    const { id } = await findUser({ id: decoded })
+    const { id } = await findUser(decoded)
 
     /**
      * create 'user' property in res.locals object and store user id in it
