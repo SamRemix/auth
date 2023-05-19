@@ -1,15 +1,13 @@
 import prisma from '../../prisma'
 
 import { hash, compare } from 'bcrypt'
-import { sign } from 'jsonwebtoken'
 
 import isEmpty from '../../utils/isEmpty'
 import checkLength from '../../utils/checkLength'
 import findUserByEmail from '../../utils/findUserByEmail'
 import isEmail from '../../utils/isEmail'
 import isStrongPassword from '../../utils/isStrongPassword'
-
-const { SECRET } = process.env as { SECRET: string }
+import createToken from '../../utils/createToken'
 
 type NewUserProps = {
   name: string,
@@ -56,7 +54,7 @@ class AuthService {
 
       return {
         user,
-        token: sign(user.id, SECRET),
+        token: createToken(user.id),
         message: 'Successfully registered 🔥'
       }
     } catch ({ message }: any) {
@@ -84,7 +82,7 @@ class AuthService {
 
       return {
         user,
-        token: sign(user.id, SECRET),
+        token: createToken(user.id),
         message: `Hi ${user.name}, welcome back! 🤘`
       }
     } catch ({ message }: any) {
