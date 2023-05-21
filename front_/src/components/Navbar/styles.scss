@@ -1,0 +1,57 @@
+@use '../../styles/vars' as v;
+
+.navbar {
+  width: calc(100% - v.$root-padding * 2);
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  position: absolute;
+  inset: .5rem 3rem auto auto;
+  z-index: 1;
+
+  &-container {
+    display: flex;
+    gap: 2rem;
+
+    .link {
+      padding: .5rem 1rem;
+      border: 1px solid v.$root-border-color;
+      font-weight: 400;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+
+      &::before,
+      &::after {
+        content: '';
+        height: 100%;
+        position: absolute;
+        inset: 0;
+      }
+
+      &::before {
+        width: 150%;
+        background: #dbff73;
+        border-right: 1px solid v.$root-border-color;
+        translate: -120%;
+        transform: skewX(-30deg);
+        z-index: -1;
+        transition: .5s;
+      }
+
+      &::after {
+        width: 100%;
+        background: #fff;
+        z-index: -2;
+      }
+
+      &:hover,
+      &.active {
+        &::before {
+          translate: -15%;
+        }
+      }
+    }
+  }
+}
