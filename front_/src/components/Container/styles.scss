@@ -10,11 +10,15 @@
     margin-left: 2rem;
     color: v.$root-border-color;
     font-family: 'Playfair Display';
+    font-weight: 500;
     font-size: 400%;
+    position: absolute;
   }
 
   &-content {
+    height: 100%;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     gap: 2rem;
   }

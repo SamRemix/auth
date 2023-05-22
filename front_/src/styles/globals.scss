@@ -18,7 +18,8 @@ body {
 
   #root {
     padding: calc(v.$root-padding + 1rem);
-    background: v.$root-background;
+    background: #fff;
+    // background: v.$root-background;
     overflow-y: auto;
 
     &::before {
@@ -29,6 +30,13 @@ body {
       position: fixed;
       inset: 0;
       pointer-events: none;
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
     a {
