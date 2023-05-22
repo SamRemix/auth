@@ -1,11 +1,13 @@
 // AFFECTS:
 // #root
 // #root::before
-$root-padding: 3rem;
+$root-padding: 2rem;
 
 // AFFECTS:
-// #root::before
-$root-border-color: #1b1b1b;
+// @mixin button border
+// .primary button background
+// .page-title color
+$dark: #1b1b1b;
 
 // AFFECTS:
 // #root

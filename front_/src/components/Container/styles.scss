@@ -3,16 +3,17 @@
 .page {
   height: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   gap: 4rem;
 
   &-title {
-    margin-left: 2rem;
-    color: v.$root-border-color;
+    margin-top: 4rem;
+    color: v.$dark;
     font-family: 'Playfair Display';
     font-weight: 500;
     font-size: 400%;
-    position: absolute;
   }
 
   &-content {

@@ -1,7 +1,15 @@
 @use '../../styles/vars' as v;
 @use '../../styles/mixins' as m;
 
+@mixin button($background) {
+  padding: .5rem 1rem;
+  background: $background;
+  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
 .primary {
-  @include m.button(v.$root-border-color);
+  @include button(v.$dark);
   color: #fff;
 }
