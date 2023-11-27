@@ -6,11 +6,14 @@ import App from './App'
 import './styles/globals.scss'
 
 import AuthProvider from './contexts/AuthContext'
+import ToastProvider from './contexts/ToastContext'
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <AuthProvider>
-      <App />
+      <ToastProvider>
+        <App />
+      </ToastProvider>
     </AuthProvider>
   </StrictMode>
 )

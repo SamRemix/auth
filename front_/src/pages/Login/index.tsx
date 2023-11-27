@@ -7,6 +7,7 @@ import Button from '../../components/Button'
 import { AuthContext, AuthContextProps } from '../../contexts/AuthContext'
 
 import useInputValue from '../../hooks/useInputValue'
+import useToast from '../../hooks/useToast'
 
 import axiosInstance from '../../utils/axios'
 
@@ -19,6 +20,7 @@ const Login = () => {
   const { register } = useContext(AuthContext) as AuthContextProps
 
   const { setState } = useInputValue(setUser)
+  const { addToast } = useToast()
 
   const logIn = async (e: any) => {
     e.preventDefault()
@@ -26,9 +28,11 @@ const Login = () => {
     try {
       const { data } = await axiosInstance.post('/auth/login', user)
 
+      addToast(data.message)
+
       register(data)
-    } catch (error: any) {
-      console.log(error.response.data.message)
+    } catch ({ response }: any) {
+      addToast(response.data.message, 'error')
     }
   }
 

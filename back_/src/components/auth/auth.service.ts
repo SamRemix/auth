@@ -55,7 +55,7 @@ class AuthService {
       return {
         user,
         token: createToken(user.id),
-        message: 'Successfully registered 🔥'
+        message: `Welcome ${user.name}! 👋`
       }
     } catch ({ message }: any) {
       throw new Error(message)

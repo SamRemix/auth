@@ -1,5 +1,7 @@
 import './styles.scss'
 
+import Toasts from '../Toasts'
+
 type ContainerProps = {
   title: string,
   children?: React.ReactNode
@@ -13,6 +15,8 @@ const Container = ({ title, children }: ContainerProps) => {
       <div className="page-content">
         {children}
       </div>
+
+      <Toasts />
     </section>
   )
 }

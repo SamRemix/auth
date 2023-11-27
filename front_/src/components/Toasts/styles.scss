@@ -1,0 +1,73 @@
+@use '../../styles/vars' as v;
+@use '../../styles/mixins' as mix;
+
+
+.toast-container {
+  @include mix.flex-column-gap(.5rem);
+  align-items: center;
+  position: fixed;
+  inset: auto 50% 1rem;
+  // inset: calc(1rem + v.$header-height + v.$header-inset) calc(1rem + v.$root-padding / 2) auto auto;
+  // pointer-events: none;
+  z-index: 3;
+
+  .toast {
+    padding: .8rem 1rem;
+    width: fit-content;
+    background: #fff;
+    border: 1px solid #888;
+    border-radius: .5rem;
+    @include mix.flex-center-gap(2rem);
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: default;
+
+    &-error {
+      @extend .toast;
+      border-color: #ff3e00;
+
+      .toast-content {
+        color: #ff3e00;
+      }
+
+      .indicator {
+        background: #ff3e00 !important;
+      }
+    }
+
+    .toast-content {
+      position: relative;
+
+      &::before {
+        content: '';
+        width: 1px;
+        height: 100%;
+        background: #888;
+        position: absolute;
+        inset: 0 auto auto calc(100% + 1rem);
+      }
+    }
+
+    .remove {
+      cursor: pointer;
+    }
+
+    .indicator {
+      width: 100%;
+      height: 3px;
+      background: #888;
+      position: absolute;
+      inset: auto 0 0 auto;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: scale linear forwards;
+
+      @keyframes scale {
+        100% {
+          transform: scaleX(100%);
+        }
+      }
+    }
+  }
+}
