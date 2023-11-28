@@ -34,11 +34,11 @@ const Navbar = () => {
       <div className="navbar-container">
         {auth?.isAdmin
           && (
-            <div className="link">
+            <NavLink to="/admin" className="link">
               <LockClosedIcon {...iconAttributs} />
 
               <p>Admin</p>
-            </div>
+            </NavLink>
           )}
 
         {auth?.token
