@@ -1,14 +1,34 @@
 // AFFECTS:
 // #root
 // #root::before
+// .toasts-container
 $root-padding: 2rem;
 
 // AFFECTS:
-// @mixin button border
-// .primary button background
-// .page-title color
-$dark: #1b1b1b;
+// #root
+$root-background: #f1eee0;
 
 // AFFECTS:
-// #root
-$root-background: #e6e6e6;
+// color
+// .primary (button)
+$black: #1b1b1b;
+
+// AFFECTS:
+// #root::before
+$red: #FF6058;
+
+// AFFECTS:
+// .toast-error
+$error: #ff3e00;
+
+// AFFECTS:
+// .navbar .link
+$green: #05AB61;
+
+// AFFECTS:
+// .header
+$header-height: 4rem;
+
+// AFFECTS:
+// .navbar
+$header-inset: calc($root-padding / 4);

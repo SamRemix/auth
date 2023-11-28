@@ -1,9 +1,11 @@
+import './styles/globals.scss'
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-import App from './App'
+import { BrowserRouter } from 'react-router-dom'
 
-import './styles/globals.scss'
+import App from './App'
 
 import AuthProvider from './contexts/AuthContext'
 import ToastProvider from './contexts/ToastContext'
@@ -12,7 +14,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <AuthProvider>
       <ToastProvider>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </ToastProvider>
     </AuthProvider>
   </StrictMode>

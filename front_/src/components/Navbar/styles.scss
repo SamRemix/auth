@@ -1,14 +1,19 @@
 @use '../../styles/vars' as v;
-@use '../../styles/mixins' as m;
+@use '../../styles/mixins' as mix;
 
 .navbar {
-  width: calc(100% - v.$root-padding * 3);
+  padding: 0 2rem;
+  width: calc(100% - v.$header-inset * 2);
+  height: v.$header-height;
+  background: v.$root-background;
+  box-shadow: 0 2px 4px rgba($color: #000, $alpha: .4);
+  border-radius: 1rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  position: absolute;
-  inset: v.$root-padding calc(v.$root-padding * 2) auto auto;
-  z-index: 1;
+  position: fixed;
+  inset: calc(v.$header-inset) auto auto calc(v.$header-inset);
+  z-index: 2;
 
   &-container {
     display: flex;
@@ -16,27 +21,18 @@
 
     .link {
       padding: .5rem 1rem;
-      font-weight: 400;
-      white-space: nowrap;
+      border-radius: .5rem;
+      font-weight: 500;
+      @include mix.flex-center-gap(.5rem);
       position: relative;
       cursor: pointer;
+      transition: .1s;
 
-      &::before {
-        content: '';
-        width: 0;
-        height: 100%;
-        background: #DBFF73;
-        position: absolute;
-        inset: auto 0 0 auto;
-        z-index: -1;
-        transition: .5s;
-      }
-
-      &:hover,
       &.active {
-        &::before {
-          width: 100%;
-          inset: auto auto 0 0;
+
+        p,
+        .icon {
+          color: v.$green;
         }
       }
     }

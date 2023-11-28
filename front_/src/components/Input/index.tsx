@@ -1,6 +1,7 @@
 import './styles.scss'
 
 import { useState } from 'react'
+
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 
 type InputProps = {
@@ -9,9 +10,7 @@ type InputProps = {
   label: string,
   name?: string,
   value: any,
-  onChange?: (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => void,
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
   maxLength?: number,
   autoFocus?: boolean,
   passwordValidation?: boolean
@@ -19,7 +18,6 @@ type InputProps = {
 
 const Input = ({
   type = 'text',
-  id,
   label,
   value,
   name,
@@ -31,12 +29,12 @@ const Input = ({
 
   const defaultAttributs = {
     className: 'input',
-    id,
-    // placeholder,
+    id: name,
     name,
     onChange,
     maxLength,
-    autoFocus
+    autoFocus,
+    autoComplete: 'off' // fix autoComplete issue in the navigator
   }
 
   const iconAttributs = {
@@ -47,15 +45,17 @@ const Input = ({
   return (
     <>
       {type === 'text' && (
-        <div className="input-container">
-          <label className="input-label" htmlFor={name}>{label}</label>
+        <label className="input-label" htmlFor={name}>
+          <p>{label}</p>
+
           <input value={value} {...defaultAttributs} />
-        </div>
+        </label>
       )}
 
       {type === 'password' && (
-        <div className="input-container">
-          <label className="input-label" htmlFor={name}>{label}</label>
+        <label className="input-label" htmlFor={name}>
+          <p>{label}</p>
+
           <div className="input-content">
             <input value={value} type={isDisplay ? 'text' : 'password'} {...defaultAttributs} />
 
@@ -65,7 +65,7 @@ const Input = ({
                 : <EyeIcon {...iconAttributs} />}
             </div>
           </div>
-        </div>
+        </label>
       )}
     </>
   )

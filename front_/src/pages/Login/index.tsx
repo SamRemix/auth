@@ -1,8 +1,6 @@
-import { useContext, useState } from 'react'
+import transition from '../../transition/transition'
 
-import Container from '../../components/Container'
-import Input from '../../components/Input'
-import Button from '../../components/Button'
+import { useState, useContext } from 'react'
 
 import { AuthContext, AuthContextProps } from '../../contexts/AuthContext'
 
@@ -10,6 +8,10 @@ import useInputValue from '../../hooks/useInputValue'
 import useToast from '../../hooks/useToast'
 
 import axiosInstance from '../../utils/axios'
+
+import Container from '../../components/Container'
+import Input from '../../components/Input'
+import Button from '../../components/Button'
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -60,4 +62,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default transition(Login)

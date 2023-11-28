@@ -12,3 +12,18 @@
   flex-direction: column;
   gap: $gap;
 }
+
+@mixin flex-column-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@mixin flex-column-center-gap($gap) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: $gap;
+}

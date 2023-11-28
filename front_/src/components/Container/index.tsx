@@ -1,5 +1,8 @@
 import './styles.scss'
 
+import { motion } from 'framer-motion'
+import { animation } from './motion.config'
+
 import Toasts from '../Toasts'
 
 type ContainerProps = {
@@ -10,11 +13,11 @@ type ContainerProps = {
 const Container = ({ title, children }: ContainerProps) => {
   return (
     <section className="page">
-      <h1 className="page-title">{title}</h1>
+      <motion.h1 className="page-title" {...animation.title}>{title}</motion.h1>
 
-      <div className="page-content">
+      <motion.div className="page-content" {...animation.content}>
         {children}
-      </div>
+      </motion.div>
 
       <Toasts />
     </section>

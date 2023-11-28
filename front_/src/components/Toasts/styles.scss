@@ -1,15 +1,14 @@
 @use '../../styles/vars' as v;
 @use '../../styles/mixins' as mix;
 
+$toasts-inset: calc(1rem + v.$root-padding / 2);
 
-.toast-container {
+.toasts-container {
+  width: 1px; // that fix the last toast exit animation
   @include mix.flex-column-gap(.5rem);
-  align-items: center;
+  align-items: flex-end;
   position: fixed;
-  inset: auto 50% 1rem;
-  // inset: calc(1rem + v.$header-height + v.$header-inset) calc(1rem + v.$root-padding / 2) auto auto;
-  // pointer-events: none;
-  z-index: 3;
+  inset: auto $toasts-inset $toasts-inset auto;
 
   .toast {
     padding: .8rem 1rem;
@@ -25,14 +24,14 @@
 
     &-error {
       @extend .toast;
-      border-color: #ff3e00;
+      border-color: v.$error;
 
       .toast-content {
-        color: #ff3e00;
+        color: v.$error;
       }
 
       .indicator {
-        background: #ff3e00 !important;
+        background: v.$error !important;
       }
     }
 
