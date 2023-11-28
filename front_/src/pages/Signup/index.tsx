@@ -1,10 +1,9 @@
 import transition from '../../transition/transition'
 
-import { useState, useContext } from 'react'
-
-import { AuthContext, AuthContextProps } from '../../contexts/AuthContext'
+import { useState } from 'react'
 
 import useInputValue from '../../hooks/useInputValue'
+import useAuth from '../../hooks/useAuth'
 import useToast from '../../hooks/useToast'
 
 import axiosInstance from '../../utils/axios'
@@ -20,9 +19,8 @@ const Signup = () => {
     password: ''
   })
 
-  const { register } = useContext(AuthContext) as AuthContextProps
-
   const { setState } = useInputValue(setUser)
+  const { register } = useAuth()
   const { addToast } = useToast()
 
   const signUp = async (e: any) => {

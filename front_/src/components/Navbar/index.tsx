@@ -1,6 +1,5 @@
 import './styles.scss'
 
-import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import {
@@ -11,10 +10,10 @@ import {
   ArrowLeftOnRectangleIcon
 } from '@heroicons/react/24/outline'
 
-import { AuthContext, AuthContextProps } from '../../contexts/AuthContext'
+import useAuth from '../../hooks/useAuth'
 
 const Navbar = () => {
-  const { auth, logOut } = useContext(AuthContext) as AuthContextProps
+  const { auth, logOut } = useAuth()
 
   const iconAttributs = {
     className: 'icon',
