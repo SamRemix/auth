@@ -1,11 +1,5 @@
 import { createContext, useState } from 'react'
 
-// export interface ToastProps {
-//   id: Number,
-//   text: String,
-//   duration: Number
-// }
-
 export type ToastProps = {
   id: Number
   text: String
@@ -14,7 +8,7 @@ export type ToastProps = {
 }
 
 export type ToastContextProps = {
-  toasts: Array<ToastProps>,
+  toasts: Array<ToastProps>
   setToasts: (toasts: any) => void
 }
 
@@ -27,10 +21,6 @@ export const ToastContext = createContext<ToastContextProps | null>(init)
 
 const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   const [toasts, setToasts] = useState(Array<ToastProps>)
-
-  // const addToast = (toast: {}) => {
-  //   setToasts((toasts: []) => [toast, ...toasts])
-  // }
 
   console.log('TOASTS', toasts)
 

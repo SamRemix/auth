@@ -5,7 +5,6 @@ import { ToastContext, ToastContextProps, ToastProps } from '../contexts/ToastCo
 const useToast = () => {
   const { toasts, setToasts } = useContext(ToastContext) as ToastContextProps
 
-
   const addToast = (text: String, type = '') => {
     const toast = { id: Date.now(), text, type, duration: type === 'error' ? 5 : 3 }
 
