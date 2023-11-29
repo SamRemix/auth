@@ -21,7 +21,7 @@ const Signup = () => {
 
   const { setState } = useInputValue(setUser)
   const { register } = useAuth()
-  const { addToast } = useToast()
+  const { pushToast } = useToast()
 
   const signUp = async (e: any) => {
     e.preventDefault()
@@ -29,16 +29,17 @@ const Signup = () => {
     try {
       const { data } = await axiosInstance.post('/auth/signup', user)
 
-      addToast(data.message)
-
       register(data)
     } catch ({ response }: any) {
-      addToast(response.data.message, 'error')
+      pushToast({
+        text: response.data.message,
+        type: 'error'
+      })
     }
   }
   return (
     <Container title="Sign Up">
-      <form className="form" onSubmit={signUp}>
+      <form onSubmit={signUp}>
         <Input
           label="Your name"
           value={user.name}
@@ -61,7 +62,6 @@ const Signup = () => {
           value={user.password}
           name="password"
           onChange={setState}
-          passwordValidation={true}
         />
 
         <Button>Sign up</Button>

@@ -7,7 +7,7 @@ export type AuthContextProps = {
 
 export const AuthContext = createContext<AuthContextProps | null>(null)
 
-const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+const AuthProvider = ({ children }: React.PropsWithChildren) => {
   const [auth, setAuth] = useState(null) as any
 
   const store = localStorage.getItem('auth')
@@ -19,8 +19,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     setAuth(JSON.parse(store))
   }, [store])
-
-  console.log('AUTH_CONTEXT', auth)
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>

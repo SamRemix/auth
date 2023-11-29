@@ -3,8 +3,6 @@ import './styles.scss'
 import { motion } from 'framer-motion'
 import { animation } from './motion.config'
 
-import Toasts from '../Toasts'
-
 type ContainerProps = {
   title: string,
   children?: React.ReactNode
@@ -18,8 +16,6 @@ const Container = ({ title, children }: ContainerProps) => {
       <motion.div className="page-content" {...animation.content}>
         {children}
       </motion.div>
-
-      <Toasts />
     </section>
   )
 }

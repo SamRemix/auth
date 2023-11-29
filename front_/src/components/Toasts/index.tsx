@@ -1,19 +1,44 @@
 import './styles.scss'
 
+import { useContext, useState } from 'react'
+
 import { AnimatePresence, motion } from 'framer-motion'
 import { animation } from './motion.config'
 
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
-import useToast from '../../hooks/useToast'
+import { ToastContext, ToastProps, ToastPropsWId } from '../../contexts/ToastContext'
 
 const Toasts = () => {
-  const { toasts, removeToast } = useToast()
+  const [toasts, setToasts] = useState([] as ToastPropsWId[])
+  const { pushToastRef } = useContext(ToastContext)
+
+  pushToastRef.current = ({ ...props }: ToastProps) => {
+    const toast = {
+      ...props,
+      id: Date.now(),
+      duration: props.type === 'error' ? 5 : 3
+    }
+
+    setToasts(toasts => [...toasts, toast])
+
+    setTimeout(() => {
+      setToasts(toasts => (
+        toasts.filter(({ id }) => id !== toast.id)
+      ))
+    }, toast.duration * 1000)
+  }
+
+  const removeToast = (id: number) => {
+    setToasts(toasts => (
+      toasts.filter(toast => toast.id !== id)
+    ))
+  }
 
   return (
     <motion.div className="toasts-container">
       <AnimatePresence mode="popLayout">
-        {toasts.map(({ id, text, type, duration }) => (
+        {toasts.map(({ id, text, type = '', duration }) => (
           <motion.div
             key={id.toString()}
             layoutId={id.toString()}

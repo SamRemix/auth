@@ -6,16 +6,16 @@ type TargetProps = {
 }
 
 const useInputValue = (dispatch: React.SetStateAction<any>) => {
-  const setState = ({ target }: TargetProps) => {
-    const { name, value } = target
+  return {
+    setState: ({ target }: TargetProps) => {
+      const { name, value } = target
 
-    dispatch((current: any) => ({
-      ...current,
-      [name]: value
-    }))
+      dispatch((current: any) => ({
+        ...current,
+        [name]: value
+      }))
+    }
   }
-
-  return { setState }
 }
 
 export default useInputValue

@@ -1,31 +1,31 @@
-import { createContext, useState } from 'react'
+import { createContext, useRef } from 'react'
+
+import Toasts from '../components/Toasts'
 
 export type ToastProps = {
-  id: Number
-  text: String
-  type: String
-  duration: Number
+  text: string
+  type?: string
 }
 
-export type ToastContextProps = {
-  toasts: Array<ToastProps>
-  setToasts: (toasts: any) => void
+export type ToastPropsWId = ToastProps & { id: number, duration: number }
+
+const defaultPush = (_toast: ToastProps) => { }
+
+const defaultValue = {
+  pushToastRef: {
+    current: defaultPush
+  }
 }
 
-const init = {
-  toasts: [],
-  setToasts: (_toasts) => { }
-} as ToastContextProps
+export const ToastContext = createContext(defaultValue)
 
-export const ToastContext = createContext<ToastContextProps | null>(init)
-
-const ToastProvider = ({ children }: { children: React.ReactNode }) => {
-  const [toasts, setToasts] = useState(Array<ToastProps>)
-
-  console.log('TOASTS', toasts)
+const ToastProvider = ({ children }: React.PropsWithChildren) => {
+  const pushToastRef = useRef(defaultPush)
 
   return (
-    <ToastContext.Provider value={{ toasts, setToasts }}>
+    <ToastContext.Provider value={{ pushToastRef }}>
+      <Toasts />
+
       {children}
     </ToastContext.Provider>
   )

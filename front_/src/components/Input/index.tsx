@@ -13,7 +13,6 @@ type InputProps = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
   maxLength?: number,
   autoFocus?: boolean,
-  passwordValidation?: boolean
 }
 
 const Input = ({

@@ -20,7 +20,7 @@ const Login = () => {
 
   const { setState } = useInputValue(setUser)
   const { register } = useAuth()
-  const { addToast } = useToast()
+  const { pushToast } = useToast()
 
   const logIn = async (e: any) => {
     e.preventDefault()
@@ -28,11 +28,12 @@ const Login = () => {
     try {
       const { data } = await axiosInstance.post('/auth/login', user)
 
-      addToast(data.message)
-
       register(data)
     } catch ({ response }: any) {
-      addToast(response.data.message, 'error')
+      pushToast({
+        text: response.data.message,
+        type: 'error'
+      })
     }
   }
 

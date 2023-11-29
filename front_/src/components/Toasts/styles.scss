@@ -9,6 +9,7 @@ $toasts-inset: calc(1rem + v.$root-padding / 2);
   align-items: flex-end;
   position: fixed;
   inset: auto $toasts-inset $toasts-inset auto;
+  z-index: 2;
 
   .toast {
     padding: .8rem 1rem;

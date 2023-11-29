@@ -1,33 +1,43 @@
 import { useContext } from 'react'
-
 import { useNavigate } from 'react-router-dom'
 
 import { AuthContext, AuthContextProps } from '../contexts/AuthContext'
 
+import useToast from './useToast'
+
 const useAuth = () => {
   const navigate = useNavigate()
 
-  const { auth, setAuth } = useContext(AuthContext) as AuthContextProps
+  const { setAuth } = useContext(AuthContext) as AuthContextProps
 
-  const register = ({ user, token }: any) => {
-    const isAdmin = user.role === 'ADMIN' ? true : false
+  const { pushToast } = useToast()
 
-    localStorage.setItem('auth', JSON.stringify({ user: user.id, isAdmin, token }))
+  return {
+    register: ({ user, token, message }: any) => {
+      const isAdmin = user.role === 'ADMIN' ? true : false
 
-    setAuth({ user: user.id, isAdmin, token })
+      const auth = {
+        user: user.id,
+        isAdmin,
+        token
+      }
 
-    navigate(isAdmin ? '/admin' : '/')
+      localStorage.setItem('auth', JSON.stringify(auth))
+
+      setAuth(auth)
+
+      pushToast({ text: message })
+
+      navigate(isAdmin ? '/admin' : '/')
+    },
+    logOut: () => {
+      localStorage.removeItem('auth')
+
+      setAuth(null)
+
+      navigate('/login')
+    }
   }
-
-  const logOut = () => {
-    localStorage.removeItem('auth')
-
-    setAuth(null)
-
-    navigate('/login')
-  }
-
-  return { auth, register, logOut }
 }
 
 export default useAuth
