@@ -2,15 +2,16 @@ import prisma from '../../prisma'
 
 import { compare, hash } from 'bcrypt'
 
+import excludePassword from '../../utils/excludePassword'
 import checkLength from '../../utils/checkLength'
 import findUserByEmail from '../../utils/findUserByEmail'
 import isEmail from '../../utils/isEmail'
 import isStrongPassword from '../../utils/isStrongPassword'
 
 type NewUserDataProps = {
-  name: string,
-  email: string,
-  password: string,
+  name: string
+  email: string
+  password: string
   newPassword: string
 }
 
@@ -20,7 +21,8 @@ class UsersService {
       const users = await prisma.user.findMany({
         orderBy: {
           createdAt: 'asc'
-        }
+        },
+        select: excludePassword()
       })
 
       if (users.length === 0) {

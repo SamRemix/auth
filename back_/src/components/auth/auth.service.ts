@@ -9,16 +9,12 @@ import isEmail from '../../utils/isEmail'
 import isStrongPassword from '../../utils/isStrongPassword'
 import createToken from '../../utils/createToken'
 
-type NewUserProps = {
-  name: string,
-  email: string,
+type CurrentUserProps = {
+  email: string
   password: string
 }
 
-type CurrentUserProps = {
-  email: string,
-  password: string
-}
+type NewUserProps = CurrentUserProps & { name: string }
 
 class AuthService {
   signup = async (newUser: NewUserProps) => {
@@ -53,7 +49,10 @@ class AuthService {
       })
 
       return {
-        user,
+        user: {
+          id: user.id,
+          role: user.role
+        },
         token: createToken(user.id),
         message: `Welcome ${user.name}! 👋`
       }
@@ -81,7 +80,10 @@ class AuthService {
       }
 
       return {
-        user,
+        user: {
+          id: user.id,
+          role: user.role
+        },
         token: createToken(user.id),
         message: `Hi ${user.name}, welcome back! 🤘`
       }

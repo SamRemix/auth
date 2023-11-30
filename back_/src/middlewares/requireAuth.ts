@@ -11,20 +11,17 @@ const requireAuth = async ({ headers }: Request, { locals }: Response, next: Nex
       throw new Error('You\'re not authorized to access this resource, you must authenticate.')
     }
 
-    // remove the token prefix ('Bearer ')
-    const token = authorization.split(' ')[1]
-
-    const decoded: any = verify(token, process.env.SECRET as string, (err, decoded) => {
+    const decoded: any = verify(authorization, process.env.SECRET as string, (err, decoded) => {
       if (err) {
         console.log(err.name)
 
-        throw new Error(`Request isn\'t authorized, ${err.message}.`)
+        throw new Error(`Request isn't authorized, ${err.message}.`)
       }
 
       return decoded
     })
 
-    const { id } = await findUser(decoded)
+    const { id } = await findUser(decoded.id)
 
     /**
      * create 'user' property in res.locals object and store user id in it
@@ -39,6 +36,3 @@ const requireAuth = async ({ headers }: Request, { locals }: Response, next: Nex
 }
 
 export default requireAuth
-
-// ADMIN = eyJhbGciOiJIUzI1NiJ9.NjQ2NGIzYWFkYTVhNTcwM2UwOTA5YWI4.zaZNN8BQgWzqUbQ_b52TQ3i4XDSimZzOSdoAWb40P_I
-// USER = eyJhbGciOiJIUzI1NiJ9.NjQ2NjUwZTgyNWEwMGUxMjM2NjBjN2Ji.05yU0syxaw-o3foPvB2oC7rLUl3Ib7oiBYDlDmxH3vs

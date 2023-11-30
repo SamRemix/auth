@@ -1,4 +1,15 @@
 // FLEX ROW
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-gap($gap) {
+  display: flex;
+  gap: $gap;
+}
+
 @mixin flex-center-gap($gap) {
   display: flex;
   align-items: center;
