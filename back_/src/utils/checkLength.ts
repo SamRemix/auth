@@ -1,6 +1,6 @@
 type CheckLengthProps = {
-  string: string,
-  range: number[],
+  string: string
+  range: [number, number]
   prefix?: string
 }
 

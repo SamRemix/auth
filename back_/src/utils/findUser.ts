@@ -11,7 +11,11 @@ const findUser = async (id: string) => {
     throw new Error('User not found, invalid id')
   }
 
-  return data
+  // only id & role are necessary for auth & admin permission
+  return {
+    id,
+    role: data.role
+  }
 }
 
 export default findUser

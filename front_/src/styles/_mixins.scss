@@ -18,6 +18,11 @@
 }
 
 // FLEX COLUMN
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 @mixin flex-column-gap($gap) {
   display: flex;
   flex-direction: column;

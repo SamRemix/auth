@@ -2,8 +2,8 @@ const isEmpty = (body: { [key: string]: any }) => {
   let emptyFields: string[] = []
   let error = ''
 
-  Object.entries(body).map(([key, value]) => {
-    if (!value || value.trim().length === 0) {
+  Object.entries(body).map(([key, value]: [string, string]) => {
+    if (!value.trim()) {
       emptyFields.push(key)
 
       if (emptyFields.length === 1) {

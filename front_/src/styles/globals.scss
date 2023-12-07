@@ -5,35 +5,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-html,
-body,
-#root {
-  height: 100%;
+*::-webkit-scrollbar {
+  display: none;
 }
 
 body {
+  background: v.$root-background;
   color: v.$black;
   font-family: 'Poppins';
   font-weight: 300;
-  overflow: hidden;
 
   #root {
+    min-height: 100vh;
     padding: v.$root-padding;
-    background: v.$root-background;
-    overflow-y: auto;
     @include mix.flex-column-center;
     position: relative;
 
-    $border-inset: calc(v.$root-padding / 2);
-
     &::before {
       content: '';
-      width: calc(100% - v.$root-padding);
-      height: calc(100% - v.$root-padding);
-      box-shadow: 0 0 0 v.$root-padding v.$red;
-      border-radius: $border-inset;
+      width: calc(100% - v.$root-border-size);
+      height: calc(100% - v.$root-border-size);
+      box-shadow: 0 0 0 v.$root-border-size v.$red;
+      border-radius: v.$root-border;
       position: fixed;
-      inset: $border-inset auto auto $border-inset;
+      inset: v.$root-border auto auto v.$root-border;
       z-index: 3;
       pointer-events: none;
     }

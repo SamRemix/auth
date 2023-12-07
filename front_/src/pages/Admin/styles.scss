@@ -3,6 +3,7 @@
 
 .admin-board {
   @include mix.flex-gap(1rem);
+  justify-content: center;
   flex-wrap: wrap;
 
   .user-card {

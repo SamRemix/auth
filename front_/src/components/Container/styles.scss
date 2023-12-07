@@ -2,7 +2,8 @@
 @use '../../styles/mixins' as mix;
 
 .page {
-  margin: 4rem 0;
+  margin: 4rem 0 0;
+  min-height: 100%;
   @include mix.flex-column-center-gap(4rem);
 
   &-title {
@@ -10,10 +11,10 @@
     font-weight: 700;
     font-size: 400%;
     font-style: italic;
+    white-space: nowrap;
   }
 
   &-content {
-    height: 100%;
     @include mix.flex-column-gap(2rem);
   }
 }

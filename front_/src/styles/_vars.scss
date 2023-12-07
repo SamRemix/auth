@@ -1,8 +1,17 @@
 // AFFECTS:
 // #root
-// #root::before
 // .toasts-container
-$root-padding: 2rem;
+$root-padding: 4rem;
+
+// AFFECTS:
+// #root::before
+$root-border: calc($root-padding / 4);
+$root-border-size: calc($root-padding / 2);
+
+// AFFECTS:
+// .navbar
+$header-height: 4rem;
+$header-inset: calc($root-padding / 8);
 
 // AFFECTS:
 // #root
@@ -24,11 +33,3 @@ $error: #ff3e00;
 // AFFECTS:
 // .navbar .link
 $green: #05AB61;
-
-// AFFECTS:
-// .header
-$header-height: 4rem;
-
-// AFFECTS:
-// .navbar
-$header-inset: calc($root-padding / 4);
