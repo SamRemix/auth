@@ -48,7 +48,7 @@ const Reviews = () => {
     try {
       const { data } = await axiosInstance.post('/albums', album, {
         'headers': {
-          'Authorization': auth.token
+          'Authorization': `Bearer ${auth.token}`
         }
       })
 
@@ -96,7 +96,7 @@ const Reviews = () => {
     try {
       const { data } = await axiosInstance.delete(`/albums/${id}`, {
         'headers': {
-          'Authorization': auth.token
+          'Authorization': `Bearer ${auth.token}`
         }
       })
 

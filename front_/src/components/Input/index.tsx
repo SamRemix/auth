@@ -5,14 +5,14 @@ import { useState } from 'react'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 
 type InputProps = {
-  type?: string,
-  id?: string,
-  label: string,
-  name?: string,
-  value: any,
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  maxLength?: number,
-  autoFocus?: boolean,
+  type?: string
+  id?: string
+  label: string
+  name?: string
+  value: any
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  maxLength?: number
+  autoFocus?: boolean
 }
 
 const Input = ({

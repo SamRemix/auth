@@ -3,14 +3,18 @@ import prisma from '../../prisma'
 import { compare, hash } from 'bcrypt'
 
 import excludePassword from '../../utils/excludePassword'
-import checkLength from '../../utils/checkLength'
+import findUser from '../../utils/findUser'
+import checkNameLength from '../../utils/checkNameLength'
 import findUserByEmail from '../../utils/findUserByEmail'
 import isEmail from '../../utils/isEmail'
 import isStrongPassword from '../../utils/isStrongPassword'
 
-type NewUserDataProps = {
+type UserProps = {
   name: string
   email: string
+}
+
+type PasswordProps = {
   password: string
   newPassword: string
 }
@@ -19,13 +23,11 @@ class UsersService {
   findAll = async () => {
     try {
       const users = await prisma.user.findMany({
-        orderBy: {
-          createdAt: 'asc'
-        },
+        orderBy: { createdAt: 'asc' },
         select: excludePassword()
       })
 
-      if (users.length === 0) {
+      if (!users.length) {
         throw new Error('No users found')
       }
 
@@ -37,49 +39,39 @@ class UsersService {
 
   findOne = async (id: string) => {
     try {
-      const user = await prisma.user.findUnique({
-        where: {
-          id
-        }
-      })
-
-      if (!user) {
-        throw new Error('User not found')
-      }
-
-      return user
+      return await findUser(id)
     } catch ({ message }: any) {
       throw new Error(message)
     }
   }
 
-  update = async (id: string, newUserData: NewUserDataProps) => {
-    const { name, email, password, newPassword } = newUserData
+  update = async (id: string, { name, email }: UserProps) => {
+    let newUser = {
+      name: '',
+      email: ''
+    }
 
     try {
-      const currentUser = await prisma.user.findUnique({
-        where: {
-          id
-        }
-      })
+      const currentUser = await findUser(id)
 
-      if (!currentUser) {
-        throw new Error('User not found')
+      if ((name === currentUser.name) && (email === currentUser.email)) {
+        return
       }
 
-      if (name) {
-        checkLength({
+      if (name === currentUser.name) {
+        newUser.name = currentUser.name
+      } else {
+        checkNameLength({
           string: name,
-          range: [3, 32],
-          prefix: 'Your name'
+          range: [3, 32]
         })
+
+        newUser.name = name
       }
 
-      if (email) {
-        if (email === currentUser.email) {
-          throw new Error('This email is already yours')
-        }
-
+      if (email === currentUser.email) {
+        newUser.email = currentUser.email
+      } else {
         const exists = await findUserByEmail(email)
 
         if (exists) {
@@ -87,13 +79,41 @@ class UsersService {
         }
 
         isEmail(email)
+
+        newUser.email = email
       }
 
-      let hashedPassword
+      const user = await prisma.user.update({
+        where: { id },
+        data: { ...newUser }
+      })
 
-      if (!password && newPassword) {
+      return {
+        user,
+        message: 'Successful update!'
+      }
+    } catch ({ message }: any) {
+      throw new Error(message)
+    }
+  }
+
+  updatePassword = async (id: string, { password, newPassword }: PasswordProps) => {
+    try {
+      const currentUser = await findUser(id)
+
+      if (!password.trim() && !newPassword.trim()) {
+        return
+      }
+
+      if (!password.trim() && newPassword) {
         throw new Error('Your current password is required')
       }
+
+      if (password && !newPassword.trim()) {
+        throw new Error('New password is required')
+      }
+
+      let hashedPassword = ''
 
       if (password && newPassword) {
         const match = await compare(password, currentUser.password)
@@ -111,16 +131,15 @@ class UsersService {
         hashedPassword = await hash(newPassword, 10)
       }
 
-      return await prisma.user.update({
-        where: {
-          id
-        },
-        data: {
-          name: name || currentUser.name,
-          email: email || currentUser.email,
-          password: hashedPassword || currentUser.password
-        }
+      const user = await prisma.user.update({
+        where: { id },
+        data: { password: hashedPassword }
       })
+
+      return {
+        user,
+        message: 'Password has been successfully updated 🔒'
+      }
     } catch ({ message }: any) {
       throw new Error(message)
     }
@@ -128,11 +147,15 @@ class UsersService {
 
   remove = async (id: string) => {
     try {
-      return await prisma.user.delete({
-        where: {
-          id
-        }
+      const user = await findUser(id)
+
+      await prisma.user.delete({
+        where: { id }
       })
+
+      return {
+        message: `You deleted ${user.name} account`
+      }
     } catch ({ message }: any) {
       throw new Error(message)
     }

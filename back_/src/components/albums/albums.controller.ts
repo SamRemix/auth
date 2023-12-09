@@ -25,6 +25,26 @@ class AlbumsController {
     }
   }
 
+  findOne = async ({ params }: Request, res: Response, next: NextFunction) => {
+    try {
+      const album = await albumsService.findOne(params.id)
+
+      res.status(200).json(album)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  update = async ({ params, body }: Request, res: Response, next: NextFunction) => {
+    try {
+      const album = await albumsService.update(params.id, body)
+
+      res.status(200).json(album)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   remove = async ({ params }: Request, res: Response, next: NextFunction) => {
     try {
       const album = await albumsService.remove(params.id)

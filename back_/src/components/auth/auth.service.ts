@@ -3,7 +3,7 @@ import prisma from '../../prisma'
 import { hash, compare } from 'bcrypt'
 
 import isEmpty from '../../utils/isEmpty'
-import checkLength from '../../utils/checkLength'
+import checkNameLength from '../../utils/checkNameLength'
 import findUserByEmail from '../../utils/findUserByEmail'
 import isEmail from '../../utils/isEmail'
 import isStrongPassword from '../../utils/isStrongPassword'
@@ -23,10 +23,9 @@ class AuthService {
     try {
       isEmpty({ name, email, password })
 
-      checkLength({
+      checkNameLength({
         string: name,
-        range: [3, 32],
-        prefix: 'Your name'
+        range: [3, 32]
       })
 
       const exists = await findUserByEmail(email)

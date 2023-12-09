@@ -11,7 +11,10 @@ const requireAuth = async ({ headers }: Request, { locals }: Response, next: Nex
       throw new Error('You\'re not authorized to access this resource, you must authenticate.')
     }
 
-    const decoded: any = verify(authorization, process.env.SECRET as string, (err, decoded) => {
+    // remove 'Bearer ' prefix
+    const token = authorization.split(' ')[1]
+
+    const decoded: any = verify(token, process.env.SECRET as string, (err, decoded) => {
       if (err) {
         console.log(err.name)
 

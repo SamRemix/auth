@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { animation } from './motion.config'
 
 type ContainerProps = {
-  title: string,
+  title: string
   children?: React.ReactNode
 }
 

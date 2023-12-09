@@ -31,7 +31,7 @@ const Admin = () => {
     try {
       const { data } = await axiosInstance.get('/users', {
         'headers': {
-          'Authorization': token
+          'Authorization': `Bearer ${token}`
         }
       })
 
@@ -49,7 +49,7 @@ const Admin = () => {
   const deletUser = async (id: string) => {
     await axiosInstance.delete(`/users/${id}`, {
       'headers': {
-        'Authorization': token
+        'Authorization': `Bearer ${token}`
       }
     })
 

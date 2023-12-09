@@ -1,7 +1,8 @@
 import prisma from '../../prisma'
 
 import isEmpty from '../../utils/isEmpty'
-import findAlbumByTitle from '../../utils/findAlbumByTitle'
+import isAnExistingAlbum from '../../utils/isAnExistingAlbum'
+import findAlbum from '../../utils/findAlbum'
 
 type AlbumProps = {
   title: string
@@ -9,27 +10,21 @@ type AlbumProps = {
 }
 
 class AlbumsService {
-  create = async (newAlbum: AlbumProps) => {
-    const { title, release } = newAlbum
+  create = async (body: AlbumProps) => {
+    const { title, release } = body
 
     try {
       isEmpty({ title, release })
 
-      const exists = await findAlbumByTitle(title)
-
-      if (exists) {
-        throw new Error(`The ${title} album already exists`)
-      }
+      await isAnExistingAlbum(title)
 
       const album = await prisma.album.create({
-        data: {
-          ...newAlbum
-        }
+        data: { ...body }
       })
 
       return {
         album,
-        message: `You add ${album.title}! 🎸`
+        message: `You added ${album.title}! 🎸`
       }
     } catch ({ message }: any) {
       throw new Error(message)
@@ -54,22 +49,65 @@ class AlbumsService {
     }
   }
 
-  remove = async (id: string) => {
+  findOne = async (id: string) => {
     try {
-      const album = await prisma.album.findUnique({
-        where: {
-          id
-        }
-      })
+      return await findAlbum(id)
+    } catch ({ message }: any) {
+      throw new Error(message)
+    }
+  }
 
-      if (!album) {
-        throw new Error('Album not found, invalid id')
+  update = async (id: string, body: AlbumProps) => {
+    const { title, release } = body
+
+    let newAlbum = {
+      title: '',
+      release: ''
+    }
+
+    try {
+      const currentAlbum = await findAlbum(id)
+
+      if ((title === currentAlbum.title) && (release === currentAlbum.release)) {
+        return
       }
 
-      await prisma.album.delete({
-        where: {
-          id
+      if (title) {
+        if (title === currentAlbum.title) {
+          newAlbum.title = currentAlbum.title
+        } else {
+          await isAnExistingAlbum(title)
+
+          newAlbum.title = title
         }
+      }
+
+      if (release) {
+        release === currentAlbum.release
+          ? newAlbum.release = currentAlbum.release
+          : newAlbum.release = release
+      }
+
+      const album = await prisma.album.update({
+        where: { id },
+        data: { ...newAlbum }
+      })
+
+      return {
+        album,
+        message: `You updated ${currentAlbum.title}`
+      }
+    } catch ({ message }: any) {
+      throw new Error(message)
+    }
+  }
+
+  remove = async (id: string) => {
+    try {
+      const album = await findAlbum(id)
+
+      await prisma.album.delete({
+        where: { id }
       })
 
       return {

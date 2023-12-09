@@ -1,6 +1,6 @@
 type TargetProps = {
   target: {
-    name: string,
+    name: string
     value: string
   }
 }

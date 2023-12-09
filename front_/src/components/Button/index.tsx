@@ -1,9 +1,9 @@
 import './styles.scss'
 
 type ButtonProps = {
-  type?: string,
-  onClick?: () => void,
-  children?: React.ReactNode,
+  type?: string
+  onClick?: () => void
+  children?: React.ReactNode
   animate?: object
 }
 

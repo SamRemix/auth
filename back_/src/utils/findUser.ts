@@ -1,21 +1,15 @@
 import prisma from '../prisma'
 
 const findUser = async (id: string) => {
-  const data = await prisma.user.findUnique({
-    where: {
-      id
-    }
+  const user = await prisma.user.findUnique({
+    where: { id }
   })
 
-  if (!data) {
-    throw new Error('User not found, invalid id')
+  if (!user) {
+    throw new Error('User not found')
   }
 
-  // only id & role are necessary for auth & admin permission
-  return {
-    id,
-    role: data.role
-  }
+  return user
 }
 
 export default findUser
