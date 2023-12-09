@@ -53,6 +53,32 @@ class AlbumsService {
       throw new Error(message)
     }
   }
+
+  remove = async (id: string) => {
+    try {
+      const album = await prisma.album.findUnique({
+        where: {
+          id
+        }
+      })
+
+      if (!album) {
+        throw new Error('Album not found, invalid id')
+      }
+
+      await prisma.album.delete({
+        where: {
+          id
+        }
+      })
+
+      return {
+        message: `You deleted ${album.title}`
+      }
+    } catch ({ message }: any) {
+      throw new Error(message)
+    }
+  }
 }
 
 export default AlbumsService

@@ -24,6 +24,16 @@ class AlbumsController {
       next(error)
     }
   }
+
+  remove = async ({ params }: Request, res: Response, next: NextFunction) => {
+    try {
+      const album = await albumsService.remove(params.id)
+
+      res.status(200).json(album)
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 export default AlbumsController

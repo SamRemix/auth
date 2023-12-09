@@ -1,18 +1,36 @@
 @use '../../styles/vars' as v;
 @use '../../styles/mixins' as mix;
 
-.album {
+.album-card {
   padding: 1rem;
   background: #e8e4d2;
   border: 1px solid v.$black;
   border-radius: .5rem;
   @include mix.flex-column-gap(1rem);
 
-  &-title {
-    font-weight: 500;
+  &-content,
+  &-footer {
+    @include mix.flex-gap(2rem);
+    justify-content: space-between;
   }
 
-  &-release {
-    font-style: italic;
+  &-content {
+    &-title {
+      font-weight: 500;
+    }
+  }
+
+  &-footer {
+    display: flex;
+    align-items: center;
+
+    &-release {
+      font-style: italic;
+    }
+
+    &-delete {
+      color: v.$error;
+      cursor: pointer;
+    }
   }
 }

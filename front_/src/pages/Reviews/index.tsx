@@ -40,11 +40,17 @@ const Reviews = () => {
 
   const toggleModal = () => setIsOpen(!isOpen)
 
+  // ADD ALBUM
+
   const addAlbum = async (e: any) => {
     e.preventDefault()
 
     try {
-      const { data } = await axiosInstance.post('/albums', album)
+      const { data } = await axiosInstance.post('/albums', album, {
+        'headers': {
+          'Authorization': auth.token
+        }
+      })
 
       setAlbums(albums => [data.album, ...albums])
 
@@ -59,6 +65,8 @@ const Reviews = () => {
     }
   }
 
+  // GET ALBUMS
+
   useEffect(() => {
     let controller = new AbortController()
 
@@ -69,8 +77,6 @@ const Reviews = () => {
         })
 
         setAlbums(data)
-
-        console.log(data)
       } catch ({ response }: any) {
         pushToast({
           text: response.data.message,
@@ -83,6 +89,27 @@ const Reviews = () => {
 
     return () => controller.abort()
   }, [])
+
+  // DELETE ALBUM
+
+  const deleteAlbum = async (id: string) => {
+    try {
+      const { data } = await axiosInstance.delete(`/albums/${id}`, {
+        'headers': {
+          'Authorization': auth.token
+        }
+      })
+
+      setAlbums(albums => albums.filter(album => album.id !== id))
+
+      pushToast({ text: data.message })
+    } catch ({ response }: any) {
+      pushToast({
+        text: response.data.message,
+        type: 'error'
+      })
+    }
+  }
 
   return (
     <Container title="Album Reviews">
@@ -119,7 +146,7 @@ const Reviews = () => {
         )}
 
       <div className="album-container">
-        {albums.map(album => <Album {...album} />)}
+        {albums.map(album => <Album {...album} deleteAlbum={deleteAlbum} />)}
       </div>
     </Container>
   )
