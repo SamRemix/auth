@@ -19,7 +19,7 @@ const Album = ({ id, title, release, deleteAlbum }: AlbumProps) => {
   const { auth } = useContext(AuthContext) as AuthContextProps
 
   return (
-    <div key={id} className="album-card">
+    <div className="album-card">
 
       <div className="album-card-content">
         <p className="album-card-content-title">{title}</p>

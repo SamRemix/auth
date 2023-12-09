@@ -2,7 +2,9 @@ import './styles.scss'
 
 import transition from '../../transition/transition'
 
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+
+import { AuthContext, AuthContextProps } from '../../contexts/AuthContext'
 
 import { TrashIcon } from '@heroicons/react/24/outline'
 
@@ -22,45 +24,49 @@ type UserProps = {
 }
 
 const Admin = () => {
-  const { pushToast } = useToast()
+  const { auth } = useContext(AuthContext) as AuthContextProps
+
   const [users, setUsers] = useState([] as UserProps[])
 
-  const token = JSON.parse(localStorage.getItem('auth') as string).token
+  const { pushToast } = useToast()
 
-  const getUsers = async () => {
-    try {
-      const { data } = await axiosInstance.get('/users', {
-        'headers': {
-          'Authorization': `Bearer ${token}`
+  useEffect(() => {
+    let controller = new AbortController()
+
+    const getUsers = async () => {
+      try {
+        const { data } = await axiosInstance.get('/users', {
+          signal: controller.signal,
+          headers: {
+            Authorization: `Bearer ${auth.token}`
+          }
+        })
+
+        setUsers(data)
+      } catch ({ response }: any) {
+        if (response) {
+          pushToast({
+            text: response.data.message,
+            type: 'error'
+          })
         }
-      })
-
-      setUsers(data)
-
-      console.log(data)
-    } catch ({ response }: any) {
-      pushToast({
-        text: response.data.message,
-        type: 'error'
-      })
+      }
     }
-  }
+
+    getUsers()
+
+    return () => controller.abort()
+  }, [])
 
   const deletUser = async (id: string) => {
     await axiosInstance.delete(`/users/${id}`, {
-      'headers': {
-        'Authorization': `Bearer ${token}`
+      headers: {
+        Authorization: `Bearer ${auth.token}`
       }
     })
 
     setUsers(users => users.filter(user => user.id !== id))
   }
-
-  useEffect(() => {
-    getUsers()
-
-    return () => { }
-  }, [])
 
   return (
     <Container title="Admin board">

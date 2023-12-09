@@ -47,8 +47,8 @@ const Reviews = () => {
 
     try {
       const { data } = await axiosInstance.post('/albums', album, {
-        'headers': {
-          'Authorization': `Bearer ${auth.token}`
+        headers: {
+          Authorization: `Bearer ${auth.token}`
         }
       })
 
@@ -78,10 +78,12 @@ const Reviews = () => {
 
         setAlbums(data)
       } catch ({ response }: any) {
-        pushToast({
-          text: response.data.message,
-          type: 'error'
-        })
+        if (response) {
+          pushToast({
+            text: response.data.message,
+            type: 'error'
+          })
+        }
       }
     }
 
@@ -95,8 +97,8 @@ const Reviews = () => {
   const deleteAlbum = async (id: string) => {
     try {
       const { data } = await axiosInstance.delete(`/albums/${id}`, {
-        'headers': {
-          'Authorization': `Bearer ${auth.token}`
+        headers: {
+          Authorization: `Bearer ${auth.token}`
         }
       })
 
@@ -146,7 +148,7 @@ const Reviews = () => {
         )}
 
       <div className="album-container">
-        {albums.map(album => <Album {...album} deleteAlbum={deleteAlbum} />)}
+        {albums.map(album => <Album key={album.id} {...album} deleteAlbum={deleteAlbum} />)}
       </div>
     </Container>
   )

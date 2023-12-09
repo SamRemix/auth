@@ -37,6 +37,7 @@ const Signup = () => {
       })
     }
   }
+
   return (
     <Container title="Sign Up">
       <form onSubmit={signUp}>
