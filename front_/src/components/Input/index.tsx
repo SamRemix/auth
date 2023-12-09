@@ -66,6 +66,14 @@ const Input = ({
           </div>
         </label>
       )}
+
+      {type === 'date' && (
+        <label className="input-label" htmlFor={name}>
+          <p>{label}</p>
+
+          <input value={value} type="date" {...defaultAttributs} />
+        </label>
+      )}
     </>
   )
 }

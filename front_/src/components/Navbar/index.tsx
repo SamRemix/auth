@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 import {
   HomeIcon,
+  MusicalNoteIcon,
   LockClosedIcon,
   ArrowRightOnRectangleIcon,
   UserPlusIcon,
@@ -33,6 +34,12 @@ const Navbar = () => {
           <HomeIcon {...iconAttributs} />
 
           <p>Home</p>
+        </NavLink>
+
+        <NavLink to="/reviews" className="link">
+          <MusicalNoteIcon {...iconAttributs} />
+
+          <p>Reviews</p>
         </NavLink>
       </div>
 

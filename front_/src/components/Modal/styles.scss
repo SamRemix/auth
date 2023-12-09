@@ -1,0 +1,38 @@
+@use '../../styles/vars' as v;
+@use '../../styles/mixins' as mix;
+
+.modal-container {
+  @include mix.flex-center;
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+
+  .backdrop {
+    background: rgba($color: v.$black, $alpha: .7);
+    position: fixed;
+    inset: 0;
+    cursor: pointer;
+  }
+
+  .modal {
+    @include mix.flex-column-center-gap(4rem);
+    padding: 4rem;
+    min-width: 40%;
+    background: v.$root-background;
+    border-radius: 1rem;
+    position: relative;
+
+    &-close {
+      position: absolute;
+      inset: .5rem;
+      cursor: pointer;
+    }
+
+    &-title {
+      font-family: 'Playfair Display';
+      font-weight: 700;
+      font-size: 300%;
+      font-style: italic;
+    }
+  }
+}
