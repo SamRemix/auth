@@ -8,6 +8,7 @@ import { AuthContext, AuthContextProps } from '../../contexts/AuthContext'
 
 import useInputValue from '../../hooks/useInputValue'
 import useToast from '../../hooks/useToast'
+import useSearch from '../../hooks/useSearch'
 
 import axiosInstance from '../../utils/axios'
 
@@ -37,6 +38,7 @@ const Reviews = () => {
 
   const { setState } = useInputValue(setAlbum)
   const { pushToast } = useToast()
+  const { prefix, setPrefix, search } = useSearch()
 
   const toggleModal = () => setIsOpen(!isOpen)
 
@@ -115,6 +117,14 @@ const Reviews = () => {
 
   return (
     <Container title="Album Reviews">
+      <Input
+        type="search"
+        value={prefix}
+        onChange={({ target }) => (
+          setPrefix(target.value)
+        )}
+      />
+
       {auth?.isAdmin
         && (
           <>
@@ -148,7 +158,13 @@ const Reviews = () => {
         )}
 
       <div className="album-container">
-        {albums.map(album => <Album key={album.id} {...album} deleteAlbum={deleteAlbum} />)}
+        {search(albums).map(album => (
+          <Album
+            key={album.id}
+            {...album}
+            deleteAlbum={deleteAlbum}
+          />
+        ))}
       </div>
     </Container>
   )

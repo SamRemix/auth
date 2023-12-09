@@ -3,6 +3,14 @@
 
 $border-color: #aaa;
 
+@mixin icon {
+  padding: 0 .5rem;
+  height: 2.5rem;
+  background: #444;
+  color: #fff;
+  display: flex;
+}
+
 .input-label {
   width: 100%;
   @include mix.flex-column-gap(.5rem);
@@ -30,13 +38,26 @@ $border-color: #aaa;
     gap: .5rem;
 
     &-icon {
-      padding: 0 .5rem;
-      height: 2.5rem;
-      background: #444;
+      @include icon;
       border-radius: .5rem;
-      color: #fff;
-      display: flex;
       cursor: pointer;
+    }
+  }
+
+  .input-search {
+    display: flex;
+    gap: .5rem;
+    position: relative;
+
+    .input {
+      padding-right: 3rem;
+    }
+
+    &-icon {
+      @include icon;
+      border-radius: 0 .5rem .5rem 0;
+      position: absolute;
+      inset: 0 0rem auto auto;
     }
   }
 }

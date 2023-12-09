@@ -2,12 +2,12 @@ import './styles.scss'
 
 import { useState } from 'react'
 
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
+import { EyeIcon, EyeSlashIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 type InputProps = {
   type?: string
   id?: string
-  label: string
+  label?: string
   name?: string
   value: any
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -72,6 +72,18 @@ const Input = ({
           <p>{label}</p>
 
           <input value={value} type="date" {...defaultAttributs} />
+        </label>
+      )}
+
+      {type === 'search' && (
+        <label className="input-label" htmlFor={name}>
+          <div className="input-search">
+            <input value={value} type="text" placeholder="Search album" {...defaultAttributs} />
+
+            <div className="input-search-icon">
+              <MagnifyingGlassIcon width="1.5em" />
+            </div>
+          </div>
         </label>
       )}
     </>
