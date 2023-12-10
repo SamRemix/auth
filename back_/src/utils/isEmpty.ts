@@ -3,7 +3,7 @@ const isEmpty = (body: { [key: string]: any }) => {
   let error = ''
 
   Object.entries(body).map(([key, value]) => {
-    if (!value.trim()) {
+    if (!value?.trim()) {
       emptyFields.push(key)
 
       if (emptyFields.length === 1) {

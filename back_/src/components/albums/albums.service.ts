@@ -65,6 +65,8 @@ class AlbumsService {
       release: ''
     }
 
+    console.log(body)
+
     try {
       const currentAlbum = await findAlbum(id)
 
@@ -72,21 +74,21 @@ class AlbumsService {
         return
       }
 
-      if (title) {
-        if (title === currentAlbum.title) {
-          newAlbum.title = currentAlbum.title
-        } else {
-          await isAnExistingAlbum(title)
+      if (title === currentAlbum.title || !title) {
+        newAlbum.title = currentAlbum.title
+      } else {
+        await isAnExistingAlbum(title)
 
-          newAlbum.title = title
-        }
+        newAlbum.title = title
       }
 
-      if (release) {
-        release === currentAlbum.release
-          ? newAlbum.release = currentAlbum.release
-          : newAlbum.release = release
+      if (release === currentAlbum.release || !release) {
+        newAlbum.release = currentAlbum.release
+      } else {
+        newAlbum.release = release
       }
+
+      console.log(newAlbum)
 
       const album = await prisma.album.update({
         where: { id },

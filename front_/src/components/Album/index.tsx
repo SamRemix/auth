@@ -1,6 +1,7 @@
 import './styles.scss'
 
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 
 import { TrashIcon } from '@heroicons/react/24/outline'
 
@@ -22,7 +23,9 @@ const Album = ({ id, title, release, deleteAlbum }: AlbumProps) => {
     <div className="album-card">
 
       <div className="album-card-content">
-        <p className="album-card-content-title">{title}</p>
+        <Link to={`${id}`}>
+          <p className="album-card-content-title">{title}</p>
+        </Link>
       </div>
 
       <div className="album-card-footer">

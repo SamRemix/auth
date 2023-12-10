@@ -86,6 +86,19 @@ const Input = ({
           </div>
         </div>
       )}
+
+      {type.includes('update') && (
+        <label className="input-label" htmlFor={name}>
+          <p>{label}</p>
+
+          <input
+            defaultValue={value}
+            type={type === 'updateDate' ? 'date' : 'text'}
+            {...defaultAttributs}
+          />
+        </label>
+
+      )}
     </>
   )
 }

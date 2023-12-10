@@ -13,8 +13,8 @@ usersRouter
   .use(requireAuth, requireAdmin)
   .get('/', findAll)
   .get('/:id', findOne)
-  .put('/:id', update)
-  .put('/security/:id', updatePassword)
+  .patch('/:id', update)
+  .patch('/security/:id', updatePassword)
   .delete('/:id', remove)
 
 export default usersRouter

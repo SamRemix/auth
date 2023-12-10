@@ -10,6 +10,10 @@
   &.isJustify {
     justify-content: center;
     align-items: center;
+
+    .page-content {
+      align-items: center;
+    }
   }
 
   &-title {

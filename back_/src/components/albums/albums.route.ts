@@ -14,7 +14,7 @@ albumsRouter
   .get('/:id', findOne)
   .use(requireAuth, requireAdmin)
   .post('/', create)
-  .put('/:id', update)
+  .patch('/:id', update)
   .delete('/:id', remove)
 
 export default albumsRouter

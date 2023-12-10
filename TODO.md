@@ -4,10 +4,9 @@
 
 ### GENERAL
 
-- Animate components
-  - *Modal*
-  - *User cards (on delete)*
-  - *Album cards (on create & delete)*
+- Responsive
+- Home page
+  - *Show latest edits (album review, articles)*
 - Settings page
   - *Switch dark/light theme*
 - About page
@@ -16,6 +15,10 @@
 - Articles page
   - *Buckethead history*
   - *Guitars & gear*
+- Animate components
+  - *Modal*
+  - *User cards (on delete)*
+  - *Album cards (on create & delete)*
 
 ### USER
 
@@ -25,10 +28,12 @@
 
 ### ALBUM
 
-- Update form
 - File uploader for covers
-- Single album page
-  - *Album review & spec*
+- Single album review & spec
+
+#### *FIX*
+
+- On submit update, the update request is made even if the values have not been modified
 
 ### TRACK
 
