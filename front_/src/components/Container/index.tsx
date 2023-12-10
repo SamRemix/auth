@@ -5,12 +5,13 @@ import { animation } from './motion.config'
 
 type ContainerProps = {
   title: string
+  justifyContent?: boolean
   children?: React.ReactNode
 }
 
-const Container = ({ title, children }: ContainerProps) => {
+const Container = ({ title, justifyContent, children }: ContainerProps) => {
   return (
-    <section className="page">
+    <section className={justifyContent ? 'page isJustify' : 'page'}>
       <motion.h1 className="page-title" {...animation.title}>{title}</motion.h1>
 
       <motion.div className="page-content" {...animation.content}>

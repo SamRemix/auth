@@ -1,8 +1,9 @@
 @use '../../styles/vars' as v;
-@use '../../styles/mixins' as m;
+@use '../../styles/mixins' as mix;
 
 @mixin button($border, $focus-border) {
   padding: .5rem 1rem;
+  height: v.$input-height;
   border: 2px solid $border;
   border-radius: .5rem;
   font-weight: 500;

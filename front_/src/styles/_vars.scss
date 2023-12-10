@@ -1,5 +1,6 @@
 // AFFECTS:
 // #root
+// . page
 // .toasts-container
 $root-padding: 4rem;
 
@@ -10,8 +11,17 @@ $root-border-size: calc($root-padding / 2);
 
 // AFFECTS:
 // .navbar
+// . page
 $header-height: 4rem;
+
+// AFFECTS:
+// .navbar
 $header-inset: calc($root-padding / 8);
+
+// AFFECTS:
+// .input
+// button
+$input-height: 2.5rem;
 
 // AFFECTS:
 // #root
@@ -20,8 +30,7 @@ $root-background: #f1eee0;
 
 // AFFECTS:
 // color
-// .primary (button)
-// .backdrop (modal
+// .backdrop (modal)
 $black: #1b1b1b;
 
 // AFFECTS:

@@ -4,6 +4,10 @@
 
 ### GENERAL
 
+- Animate components
+  - *Modal*
+  - *User cards (on delete)*
+  - *Album cards (on create & delete)*
 - Settings page
   - *Switch dark/light theme*
 - About page

@@ -117,47 +117,44 @@ const Reviews = () => {
 
   return (
     <Container title="Album Reviews">
-      <Input
-        type="search"
-        value={prefix}
-        onChange={({ target }) => (
-          setPrefix(target.value)
-        )}
-      />
+      <div className="album-reviews-header">
+        {auth?.isAdmin && <Button onClick={toggleModal}>Add album</Button>}
 
-      {auth?.isAdmin
+        <Input
+          type="search"
+          value={prefix}
+          onChange={({ target }) => (
+            setPrefix(target.value)
+          )}
+        />
+      </div>
+
+      {auth?.isAdmin && isOpen
         && (
-          <>
-            <Button onClick={toggleModal}>Add album</Button>
+          <Modal title="Add Album" toggle={toggleModal}>
+            <form onSubmit={addAlbum}>
+              <Input
+                label="Album title"
+                value={album.title}
+                name="title"
+                onChange={setState}
+                autoFocus={true}
+              />
 
-            {isOpen
-              && (
-                <Modal title="Add Album" toggle={toggleModal}>
-                  <form onSubmit={addAlbum}>
-                    <Input
-                      label="Album title"
-                      value={album.title}
-                      name="title"
-                      onChange={setState}
-                      autoFocus={true}
-                    />
+              <Input
+                type="date"
+                label="Release date"
+                value={album.release}
+                name="release"
+                onChange={setState}
+              />
 
-                    <Input
-                      type="date"
-                      label="Release date"
-                      value={album.release}
-                      name="release"
-                      onChange={setState}
-                    />
-
-                    <Button>Add album</Button>
-                  </form>
-                </Modal>
-              )}
-          </>
+              <Button>Add album</Button>
+            </form>
+          </Modal>
         )}
 
-      <div className="album-container">
+      <div className="album-reviews-container">
         {search(albums).map(album => (
           <Album
             key={album.id}

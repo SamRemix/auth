@@ -38,7 +38,7 @@ const Login = () => {
   }
 
   return (
-    <Container title="Log In">
+    <Container title="Log In" justifyContent={true}>
       <form onSubmit={logIn}>
         <Input
           label="Your email"

@@ -39,7 +39,7 @@ const Signup = () => {
   }
 
   return (
-    <Container title="Sign Up">
+    <Container title="Sign Up" justifyContent={true}>
       <form onSubmit={signUp}>
         <Input
           label="Your name"

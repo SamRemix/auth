@@ -76,7 +76,7 @@ const Input = ({
       )}
 
       {type === 'search' && (
-        <label className="input-label" htmlFor={name}>
+        <div className="search-bar">
           <div className="input-search">
             <input value={value} type="text" placeholder="Search album" {...defaultAttributs} />
 
@@ -84,7 +84,7 @@ const Input = ({
               <MagnifyingGlassIcon width="1.5em" />
             </div>
           </div>
-        </label>
+        </div>
       )}
     </>
   )

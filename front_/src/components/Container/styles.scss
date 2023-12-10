@@ -2,11 +2,18 @@
 @use '../../styles/mixins' as mix;
 
 .page {
-  margin: 4rem 0 0;
-  min-height: 100%;
-  @include mix.flex-column-center-gap(4rem);
+  margin: v.$header-height 0;
+  width: 100%;
+  min-height: calc(100vh - ((v.$root-padding + v.$header-height) * 2));
+  @include mix.flex-column-gap(4rem);
+
+  &.isJustify {
+    justify-content: center;
+    align-items: center;
+  }
 
   &-title {
+    text-align: center;
     font-family: 'Playfair Display';
     font-weight: 700;
     font-size: 400%;
@@ -16,6 +23,5 @@
 
   &-content {
     @include mix.flex-column-gap(2rem);
-    align-items: center;
   }
 }
