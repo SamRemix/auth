@@ -10,6 +10,8 @@ type ContainerProps = {
 }
 
 const Container = ({ title, justifyContent, children }: ContainerProps) => {
+  document.title = `Bhland - ${title}`
+
   return (
     <section className={justifyContent ? 'page isJustify' : 'page'}>
       <motion.h1 className="page-title" {...animation.title}>{title}</motion.h1>

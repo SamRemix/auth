@@ -65,8 +65,6 @@ class AlbumsService {
       release: ''
     }
 
-    console.log(body)
-
     try {
       const currentAlbum = await findAlbum(id)
 
@@ -87,8 +85,6 @@ class AlbumsService {
       } else {
         newAlbum.release = release
       }
-
-      console.log(newAlbum)
 
       const album = await prisma.album.update({
         where: { id },

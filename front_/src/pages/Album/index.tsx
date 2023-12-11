@@ -28,11 +28,7 @@ const Album = () => {
   const { auth } = useContext(AuthContext) as AuthContextProps
 
   const [album, setAlbum] = useState({} as AlbumProps)
-
-  const [updatedAlbum, setUpdatedAlbum] = useState({
-    title: album?.title,
-    release: album?.release
-  })
+  const [updatedAlbum, setUpdatedAlbum] = useState(album)
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -73,6 +69,18 @@ const Album = () => {
   const updateAlbum = async (e: any) => {
     e.preventDefault()
 
+    /**
+     * The problem is that when I execute the updateAlbum function
+     * without modifying the value of an input,
+     * the updatedAlbum object is empty while I try to pass it the unmodified value of the album
+     * and the query executes which sends an empty object to the backend,
+     * I'm trying to fix it this way for now
+     */
+    if (!Object.keys(updatedAlbum).length) {
+      toggleModal()
+      return
+    }
+
     try {
       const { data } = await axiosInstance.patch(`/albums/${id}`, updatedAlbum, {
         headers: {
@@ -96,7 +104,7 @@ const Album = () => {
   }
 
   return (
-    <Container title={album?.title} justifyContent={true}>
+    <Container title={album.title} justifyContent={true}>
       <p>Released {formatDate(album.release)}</p>
       {auth?.isAdmin && <Button onClick={toggleModal}>Update album</Button>}
 

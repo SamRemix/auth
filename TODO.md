@@ -34,6 +34,7 @@
 #### *FIX*
 
 - On submit update, the update request is made even if the values have not been modified
+  - *At "src/pages/Album"*
 
 ### TRACK
 
