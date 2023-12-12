@@ -1,18 +1,13 @@
-type TargetProps = {
-  target: {
-    name: string
-    value: string
-  }
-}
-
 const useInputValue = (dispatch: React.SetStateAction<any>) => {
   return {
-    setState: ({ target }: TargetProps) => {
-      const { name, value } = target
+    setState: (e: React.FormEvent<HTMLInputElement>) => {
+      const { name, value, files } = e.target as HTMLInputElement & {
+        files: FileList
+      }
 
       dispatch((current: any) => ({
         ...current,
-        [name]: value
+        [name]: files ? files[0] : value
       }))
     }
   }

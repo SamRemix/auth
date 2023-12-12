@@ -5,9 +5,9 @@ import AlbumsService from './albums.service'
 const albumsService = new AlbumsService()
 
 class AlbumsController {
-  create = async ({ body }: Request, res: Response, next: NextFunction) => {
+  create = async ({ body, file }: Request, res: Response, next: NextFunction) => {
     try {
-      const album = await albumsService.create(body)
+      const album = await albumsService.create({ ...body, cover: file?.filename })
 
       res.status(200).json(album)
     } catch (error) {

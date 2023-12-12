@@ -7,14 +7,15 @@ import findAlbum from '../../utils/findAlbum'
 type AlbumProps = {
   title: string
   release: string
+  cover: string
 }
 
 class AlbumsService {
   create = async (body: AlbumProps) => {
-    const { title, release } = body
+    const { title, release, cover } = body
 
     try {
-      isEmpty({ title, release })
+      isEmpty({ title, release, cover })
 
       await isAnExistingAlbum(title)
 

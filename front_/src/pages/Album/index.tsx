@@ -16,11 +16,7 @@ import Input from '../../components/Input'
 import Button from '../../components/Button'
 import Modal from '../../components/Modal'
 
-type AlbumProps = {
-  id: string
-  title: string
-  release: string
-}
+import { AlbumProps } from '../../@types/types'
 
 const Album = () => {
   let { id } = useParams()

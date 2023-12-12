@@ -1,10 +1,7 @@
 import { useState } from 'react'
 
-type AlbumProps = {
-  id: string
-  title: string
-  release: string
-}
+import { AlbumProps } from '../@types/types'
+
 
 const useSearch = () => {
   const [prefix, setPrefix] = useState('')

@@ -26,4 +26,5 @@ model Album {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   title   String @unique
   release String
+  cover   String
 }

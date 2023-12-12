@@ -2,17 +2,24 @@ import './styles.scss'
 
 import { useState } from 'react'
 
-import { EyeIcon, EyeSlashIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import {
+  EyeIcon,
+  EyeSlashIcon,
+  MagnifyingGlassIcon,
+  ArrowUpTrayIcon
+} from '@heroicons/react/24/outline'
 
 type InputProps = {
-  type?: string
   id?: string
+  type?: string
   label?: string
+  value?: any
   name?: string
-  value: any
+  accept?: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   maxLength?: number
   autoFocus?: boolean
+  data?: string
 }
 
 const Input = ({
@@ -20,9 +27,11 @@ const Input = ({
   label,
   value,
   name,
+  accept,
   onChange,
   maxLength,
   autoFocus = false,
+  data,
 }: InputProps) => {
   const [isDisplay, setIsDisplay] = useState(false)
 
@@ -84,6 +93,22 @@ const Input = ({
               <MagnifyingGlassIcon width="1.5em" />
             </div>
           </div>
+        </div>
+      )}
+
+      {type === 'file' && (
+        <div className="input-file">
+          <p>{label}</p>
+
+          <label className="input-file-label" htmlFor={name}>
+            <p className="file-name">{data ? data : 'Choose a file'}</p>
+
+            <div className="input-file-icon">
+              <ArrowUpTrayIcon width="1.5em" />
+            </div>
+          </label>
+
+          <input value={value} accept={accept} type="file" {...defaultAttributs} />
         </div>
       )}
 

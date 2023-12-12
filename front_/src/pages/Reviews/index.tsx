@@ -18,25 +18,28 @@ import Button from '../../components/Button'
 import Modal from '../../components/Modal'
 import Album from '../../components/Album'
 
-type AlbumProps = {
-  id: string
+import { AlbumProps } from '../../@types/types'
+
+type newAlbumProps = {
   title: string
-  release: string
+  release: string,
+  cover: File | undefined
 }
 
 const Reviews = () => {
   const { auth } = useContext(AuthContext) as AuthContextProps
 
-  const [album, setAlbum] = useState({
+  const [newAlbum, setNewAlbum] = useState<newAlbumProps>({
     title: '',
-    release: ''
+    release: '',
+    cover: undefined
   })
 
   const [albums, setAlbums] = useState([] as AlbumProps[])
 
   const [isOpen, setIsOpen] = useState(false)
 
-  const { setState } = useInputValue(setAlbum)
+  const { setState } = useInputValue(setNewAlbum)
   const { pushToast } = useToast()
   const { prefix, setPrefix, search } = useSearch()
 
@@ -48,12 +51,28 @@ const Reviews = () => {
     e.preventDefault()
 
     try {
-      const { data } = await axiosInstance.post('/albums', album, {
+      if (typeof newAlbum.cover === 'undefined') {
+        return toggleModal()
+      }
+
+      const formData = new FormData()
+
+      formData.append('title', newAlbum.title)
+      formData.append('release', newAlbum.release)
+      formData.append('cover', newAlbum.cover)
+
+      const { data } = await axiosInstance.post('/albums', formData, {
         headers: {
           Authorization: `Bearer ${auth.token}`
         }
       })
 
+      // reset fields
+      setNewAlbum({
+        title: '',
+        release: '',
+        cover: undefined
+      })
       setAlbums(albums => [data.album, ...albums])
 
       toggleModal()
@@ -135,7 +154,7 @@ const Reviews = () => {
             <form onSubmit={addAlbum}>
               <Input
                 label="Album title"
-                value={album.title}
+                value={newAlbum.title}
                 name="title"
                 onChange={setState}
                 autoFocus={true}
@@ -144,9 +163,18 @@ const Reviews = () => {
               <Input
                 type="date"
                 label="Release date"
-                value={album.release}
+                value={newAlbum.release}
                 name="release"
                 onChange={setState}
+              />
+
+              <Input
+                type="file"
+                label="Album cover"
+                name="cover"
+                accept="image/png, image/jpeg"
+                onChange={setState}
+                data={newAlbum.cover?.name}
               />
 
               <Button>Add album</Button>

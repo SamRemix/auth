@@ -4,11 +4,22 @@
 .album-card {
   padding: 1rem;
   background: #e8e4d2;
-  border: 1px solid v.$black;
-  border-radius: .5rem;
-  @include mix.flex-column-gap(1rem);
+  border: 1px solid #aaa;
+  border-radius: 1rem;
+  @include mix.flex-gap(2rem);
 
-  &-content,
+  &>&-cover {
+    width: 200px;
+    height: 200px;
+    border-radius: .5rem;
+  }
+
+  &-content {
+    @include mix.flex-column-gap(2rem);
+    justify-content: space-between;
+    flex: 1;
+  }
+
   &-footer {
     @include mix.flex-gap(2rem);
     justify-content: space-between;
