@@ -22,7 +22,7 @@
 
 ### USER
 
-- Create a SUPER_ADMIN role that can give or remove ADMIN permission to other users
+- SUPER_ADMIN can give or remove ADMIN permission to other users
 - Profile page (fix update album first)
   - *Update name & email form*
   - *Update password form*
@@ -30,6 +30,7 @@
 ### ALBUM
 
 - Single album review & spec
+- Update cover (store cover in database first)
 
 #### *FIX*
 
