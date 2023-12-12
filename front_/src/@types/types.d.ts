@@ -4,3 +4,11 @@ export type AlbumProps = {
   release: string
   cover: string
 }
+
+export type UserProps = {
+  id: string
+  name: string
+  email: string
+  role: string
+  createdAt: string
+}

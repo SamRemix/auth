@@ -14,11 +14,13 @@ const useAuth = () => {
 
   return {
     register: ({ user, token, message }: any) => {
-      const isAdmin = user.role === 'ADMIN' ? true : false
+      const isAdmin = user.role.includes('ADMIN') ? true : false
+      const isSuperAdmin = user.role === 'SUPER_ADMIN' ? true : false
 
       const auth = {
         user: user.id,
         isAdmin,
+        isSuperAdmin,
         token
       }
 

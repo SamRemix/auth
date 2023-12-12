@@ -7,7 +7,7 @@ const requireAdmin = async (_req: Request, { locals }: Response, next: NextFunct
     // res.locals.user is defined in requireAuth middleware
     const { role } = await findUser(locals.user)
 
-    if (role !== 'ADMIN') {
+    if (!role.includes('ADMIN')) {
       throw new Error('You don\'t have permission to access this resource.')
     }
 

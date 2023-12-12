@@ -6,22 +6,14 @@ import { useContext, useEffect, useState } from 'react'
 
 import { AuthContext, AuthContextProps } from '../../contexts/AuthContext'
 
-import { TrashIcon } from '@heroicons/react/24/outline'
-
 import useToast from '../../hooks/useToast'
 
 import axiosInstance from '../../utils/axios'
-import formatDate from '../../utils/formatDate'
 
 import Container from '../../components/Container'
+import User from '../../components/User'
 
-type UserProps = {
-  id: string
-  name: string
-  email: string
-  role: string
-  createdAt: string
-}
+import { UserProps } from '../../@types/types'
 
 const Admin = () => {
   const { auth } = useContext(AuthContext) as AuthContextProps
@@ -29,6 +21,8 @@ const Admin = () => {
   const [users, setUsers] = useState([] as UserProps[])
 
   const { pushToast } = useToast()
+
+  // GET USERS
 
   useEffect(() => {
     let controller = new AbortController()
@@ -58,6 +52,8 @@ const Admin = () => {
     return () => controller.abort()
   }, [])
 
+  //  DELETE USER
+
   const deletUser = async (id: string) => {
     await axiosInstance.delete(`/users/${id}`, {
       headers: {
@@ -71,43 +67,12 @@ const Admin = () => {
   return (
     <Container title="Admin board">
       <div className="admin-board">
-        {users.map(({ id, name, email, role, createdAt }) => (
-          <div key={id} className={role === 'ADMIN' ? 'user-card admin' : 'user-card'}>
-            <div className="user-card-header">
-              <div className="user-card-header-name">
-                <p>{name}</p>
-              </div>
-
-              {role === 'ADMIN'
-                && (
-                  <div className="user-card-header-role">
-                    <p>{role}</p>
-                  </div>
-                )}
-            </div>
-
-            <div className="user-card-content">
-              <div className="user-card-content-email">
-                <p>{email}</p>
-              </div>
-            </div>
-
-            <div className="user-card-footer">
-              <div className="user-card-footer-createdAt">
-                <p>{formatDate(createdAt)}</p>
-              </div>
-
-              {role !== 'ADMIN'
-                && (
-                  <TrashIcon
-                    className="user-card-footer-delete"
-                    width="1.5rem"
-                    strokeWidth={1}
-                    onClick={() => deletUser(id)}
-                  />
-                )}
-            </div>
-          </div>
+        {users.map(user => (
+          <User
+            key={user.id}
+            {...user}
+            deletUser={deletUser}
+          />
         ))}
       </div>
     </Container>
