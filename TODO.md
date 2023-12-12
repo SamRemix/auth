@@ -22,25 +22,25 @@
 
 ### USER
 
-- Profile page
-  - *Name & email form*
-  - *Password form*
+- Create a SUPER_ADMIN role that can give or remove ADMIN permission to other users
+- Profile page (fix update album first)
+  - *Update name & email form*
+  - *Update password form*
 
 ### ALBUM
 
-- File uploader for covers
 - Single album review & spec
 
 #### *FIX*
 
 - On submit update, the update request is made even if the values have not been modified
   - *At "src/pages/Album"*
+- Find a way to store cover in database instead of local directory
+  - *Base64 ?*
 
 ### TRACK
 
 - Add tracks to albums
-  - *Schema & backend component*
-  - *Upgrade "add album" form*
 
 ## *v2*
 
@@ -58,7 +58,7 @@
 
 - Audio player
 - Add rating
-  - *Rating average for the current track*
+- Rating average for the current track
 
 ## *v3*
 
