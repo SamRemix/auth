@@ -7,11 +7,13 @@ import { useContext, useEffect, useState } from 'react'
 import { AuthContext, AuthContextProps } from '../../contexts/AuthContext'
 
 import useToast from '../../hooks/useToast'
+import useSearch from '../../hooks/useSearch'
 
 import axiosInstance from '../../utils/axios'
 
 import Container from '../../components/Container'
 import User from '../../components/User'
+import SearchBar from '../../components/SearchBar'
 
 import { UserProps } from '../../@types/types'
 
@@ -21,6 +23,7 @@ const Admin = () => {
   const [users, setUsers] = useState([] as UserProps[])
 
   const { pushToast } = useToast()
+  const { prefix, setPrefix, search } = useSearch()
 
   // GET USERS
 
@@ -66,8 +69,10 @@ const Admin = () => {
 
   return (
     <Container title="Admin board">
+      <SearchBar prefix={prefix} setPrefix={setPrefix} />
+
       <div className="admin-board">
-        {users.map(user => (
+        {search(users, 'name').map(user => (
           <User
             key={user.id}
             {...user}

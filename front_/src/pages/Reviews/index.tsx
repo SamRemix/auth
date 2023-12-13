@@ -17,6 +17,7 @@ import Input from '../../components/Input'
 import Button from '../../components/Button'
 import Modal from '../../components/Modal'
 import Album from '../../components/Album'
+import SearchBar from '../../components/SearchBar'
 
 import { AlbumProps } from '../../@types/types'
 
@@ -139,13 +140,7 @@ const Reviews = () => {
       <div className="album-reviews-header">
         {auth?.isAdmin && <Button onClick={toggleModal}>Add album</Button>}
 
-        <Input
-          type="search"
-          value={prefix}
-          onChange={({ target }) => (
-            setPrefix(target.value)
-          )}
-        />
+        <SearchBar prefix={prefix} setPrefix={setPrefix} />
       </div>
 
       {auth?.isAdmin && isOpen
@@ -183,7 +178,7 @@ const Reviews = () => {
         )}
 
       <div className="album-reviews-container">
-        {search(albums).map(album => (
+        {search(albums, 'title').map(album => (
           <Album
             key={album.id}
             {...album}

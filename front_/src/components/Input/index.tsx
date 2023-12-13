@@ -87,7 +87,7 @@ const Input = ({
       {type === 'search' && (
         <div className="search-bar">
           <div className="input-search">
-            <input value={value} type="text" placeholder="Search album" {...defaultAttributs} />
+            <input value={value} type="text" placeholder="Search" {...defaultAttributs} />
 
             <div className="input-search-icon">
               <MagnifyingGlassIcon width="1.5em" />

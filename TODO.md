@@ -21,7 +21,6 @@
 
 ### USER
 
-- Search bar in admin page
 - Update (fix update album first)
   - *SUPER_ADMIN can update users role (ADMIN & USER)*
   - *Name & email form*
