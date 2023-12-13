@@ -10,16 +10,14 @@ import {
 } from '@heroicons/react/24/outline'
 
 type InputProps = {
-  id?: string
   type?: string
-  label?: string
-  value?: any
-  name?: string
-  accept?: string
+  label: string
+  value?: string
+  name: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
-  maxLength?: number
   autoFocus?: boolean
-  data?: string
+  file?: string
+  fileType?: string
 }
 
 const Input = ({
@@ -27,11 +25,10 @@ const Input = ({
   label,
   value,
   name,
-  accept,
   onChange,
-  maxLength,
   autoFocus = false,
-  data,
+  file,
+  fileType
 }: InputProps) => {
   const [isDisplay, setIsDisplay] = useState(false)
 
@@ -40,7 +37,6 @@ const Input = ({
     id: name,
     name,
     onChange,
-    maxLength,
     autoFocus,
     autoComplete: 'off' // fix autoComplete issue in the navigator
   }
@@ -87,7 +83,7 @@ const Input = ({
       {type === 'search' && (
         <div className="search-bar">
           <div className="input-search">
-            <input value={value} type="text" placeholder="Search" {...defaultAttributs} />
+            <input value={value} placeholder={label} {...defaultAttributs} />
 
             <div className="input-search-icon">
               <MagnifyingGlassIcon width="1.5em" />
@@ -101,14 +97,14 @@ const Input = ({
           <p>{label}</p>
 
           <label className="input-file-label" htmlFor={name}>
-            <p className="file-name">{data ? data : 'Choose a file'}</p>
+            <p className="file-name">{file ? file : 'Choose a file'}</p>
 
             <div className="input-file-icon">
               <ArrowUpTrayIcon width="1.5em" />
             </div>
           </label>
 
-          <input value={value} accept={accept} type="file" {...defaultAttributs} />
+          <input value={value} accept={fileType} type="file" {...defaultAttributs} />
         </div>
       )}
 
@@ -118,7 +114,7 @@ const Input = ({
 
           <input
             defaultValue={value}
-            type={type === 'updateDate' ? 'date' : 'text'}
+            type={type.split('-')[1]}
             {...defaultAttributs}
           />
         </label>

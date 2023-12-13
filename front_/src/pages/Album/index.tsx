@@ -109,7 +109,7 @@ const Album = () => {
           <Modal title="Update Album" toggle={toggleModal}>
             <form onSubmit={updateAlbum}>
               <Input
-                type="updateText"
+                type={'update-text'}
                 label="Album title"
                 value={album.title}
                 name="title"
@@ -118,7 +118,7 @@ const Album = () => {
               />
 
               <Input
-                type="updateDate"
+                type="update-date"
                 label="Release date"
                 value={album.release}
                 name="release"

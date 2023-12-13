@@ -46,7 +46,6 @@ const Signup = () => {
           value={user.name}
           name="name"
           onChange={setState}
-          maxLength={32}
           autoFocus={true}
         />
 

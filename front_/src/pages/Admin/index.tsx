@@ -69,7 +69,11 @@ const Admin = () => {
 
   return (
     <Container title="Admin board">
-      <SearchBar prefix={prefix} setPrefix={setPrefix} />
+      <SearchBar
+        label="Search user"
+        prefix={prefix}
+        setPrefix={setPrefix}
+      />
 
       <div className="admin-board">
         {search(users, 'name').map(user => (

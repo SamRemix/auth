@@ -140,7 +140,11 @@ const Reviews = () => {
       <div className="album-reviews-header">
         {auth?.isAdmin && <Button onClick={toggleModal}>Add album</Button>}
 
-        <SearchBar prefix={prefix} setPrefix={setPrefix} />
+        <SearchBar
+          label="Search album"
+          prefix={prefix}
+          setPrefix={setPrefix}
+        />
       </div>
 
       {auth?.isAdmin && isOpen
@@ -167,9 +171,9 @@ const Reviews = () => {
                 type="file"
                 label="Album cover"
                 name="cover"
-                accept="image/png, image/jpeg"
                 onChange={setState}
-                data={newAlbum.cover?.name}
+                file={newAlbum.cover?.name}
+                fileType="image/png, image/jpeg"
               />
 
               <Button>Add album</Button>
