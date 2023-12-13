@@ -51,6 +51,7 @@ class AuthService {
       return {
         user: {
           id: user.id,
+          name: user.name,
           role: user.role
         },
         token: createToken(user.id),
@@ -82,6 +83,7 @@ class AuthService {
       return {
         user: {
           id: user.id,
+          name: user.name,
           role: user.role
         },
         token: createToken(user.id),

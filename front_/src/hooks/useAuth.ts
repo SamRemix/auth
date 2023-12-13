@@ -18,7 +18,10 @@ const useAuth = () => {
       const isSuperAdmin = user.role === 'SUPER_ADMIN' ? true : false
 
       const auth = {
-        user: user.id,
+        user: {
+          id: user.id,
+          name: user.name
+        },
         isAdmin,
         isSuperAdmin,
         token

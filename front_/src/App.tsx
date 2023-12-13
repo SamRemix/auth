@@ -12,6 +12,7 @@ import Reviews from './pages/Reviews'
 import Album from './pages/Album'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
+import Profile from './pages/Profile'
 import Admin from './pages/Admin'
 import NotFound from './pages/NotFound'
 
@@ -41,6 +42,12 @@ const App = () => {
             !auth
               ? <Login />
               : <Navigate to="/" />
+          } />
+
+          <Route path={`user/:id`} element={
+            auth
+              ? <Profile />
+              : <NotFound />
           } />
 
           <Route path="admin" element={

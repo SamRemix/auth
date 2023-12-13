@@ -8,7 +8,7 @@
   background: v.$root-background;
   box-shadow: 0 2px 4px rgba($color: #000, $alpha: .4);
   border-radius: 1rem;
-  display: flex;
+  @include mix.flex-gap(2rem);
   align-items: center;
   justify-content: space-between;
   position: fixed;
@@ -16,8 +16,21 @@
   z-index: 4;
 
   &-container {
-    display: flex;
-    gap: 2rem;
+    @include mix.flex-gap(2rem);
+
+    &-auth {
+      padding: .5rem;
+      background: v.$root-background;
+      box-shadow: 0 2px 4px rgba($color: #000, $alpha: .4);
+      border-radius: 1rem;
+      @include mix.flex-column-gap(.5rem);
+      position: absolute;
+      top: calc(100% - .25rem);
+
+      .link {
+        justify-content: start !important;
+      }
+    }
 
     .link {
       padding: .5rem 1rem;
@@ -25,14 +38,19 @@
       font-weight: 500;
       @include mix.flex-center-gap(.5rem);
       position: relative;
+      white-space: nowrap;
       cursor: pointer;
       transition: .1s;
 
+      &:hover {
+        background: #FCDDB0;
+      }
+
       &.active {
 
-        p,
-        .icon {
-          color: v.$green;
+        >p,
+        >.icon {
+          color: v.$red;
         }
       }
     }

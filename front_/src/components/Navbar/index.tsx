@@ -1,11 +1,13 @@
 import './styles.scss'
 
-import { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useContext, useState } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
 
 import {
   HomeIcon,
   MusicalNoteIcon,
+  UserIcon,
+  ChevronDownIcon,
   LockClosedIcon,
   ArrowRightOnRectangleIcon,
   UserPlusIcon,
@@ -19,12 +21,31 @@ import useAuth from '../../hooks/useAuth'
 const Navbar = () => {
   const { auth } = useContext(AuthContext) as AuthContextProps
 
+  const [isOpen, setIsOpen] = useState(false)
+
+  const { pathname } = useLocation()
+
   const { logOut } = useAuth()
+
+  const isActiveLink = ['/admin', '/user'].some(path => (
+    pathname.includes(path)
+  ))
+
+  const handleLogout = () => {
+    setIsOpen(false)
+
+    logOut()
+  }
 
   const iconAttributs = {
     className: 'icon',
     width: '1.5rem',
     strokeWidth: 1.5
+  }
+
+  const chevronAttributs = {
+    ...iconAttributs,
+    width: '1.25rem'
   }
 
   return (
@@ -44,24 +65,47 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-container">
-        {auth?.isAdmin
+        {auth?.token
           && (
-            <NavLink to="/admin" className="link">
-              <LockClosedIcon {...iconAttributs} />
+            <div
+              className={`${isActiveLink ? 'link active' : 'link auth-menu'}`}
+              onMouseEnter={() => setIsOpen(true)}
+              onMouseLeave={() => setIsOpen(false)}>
+              <UserIcon {...iconAttributs} />
 
-              <p>Admin</p>
-            </NavLink>
+              <p>{auth.user.name}</p>
+
+              <ChevronDownIcon {...chevronAttributs} />
+
+              {isOpen && (
+                <div className="navbar-container-auth">
+                  <NavLink to={`/user/${auth.user.id}`} className="link">
+                    <UserIcon {...iconAttributs} />
+
+                    <p>Profile</p>
+                  </NavLink>
+
+                  {auth.isAdmin
+                    && (
+                      <NavLink to="/admin" className="link">
+                        <LockClosedIcon {...iconAttributs} />
+
+                        <p>Admin</p>
+                      </NavLink>
+                    )}
+
+                  <div className="link" onClick={handleLogout}>
+                    <ArrowRightOnRectangleIcon {...iconAttributs} />
+
+                    <p>Log out</p>
+                  </div>
+                </div>
+              )}
+            </div>
           )}
 
-        {auth?.token
-          ? (
-            <div className="link logout" onClick={logOut}>
-              <ArrowRightOnRectangleIcon {...iconAttributs} />
-
-              <p>Log out</p>
-            </div>
-          )
-          : (
+        {!auth?.token
+          && (
             <>
               <NavLink to="signup" className="link">
                 <UserPlusIcon {...iconAttributs} />

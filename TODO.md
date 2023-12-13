@@ -23,9 +23,9 @@
 ### USER
 
 - SUPER_ADMIN can give or remove ADMIN permission to other users
-- Profile page (fix update album first)
-  - *Update name & email form*
-  - *Update password form*
+- Update (fix update album first)
+  - *Name & email form*
+  - *Password form*
 
 ### ALBUM
 

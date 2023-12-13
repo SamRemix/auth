@@ -31,7 +31,7 @@ const User = ({ id, name, email, role, createdAt, deletUser }: UserDeleteProps) 
       isDeletable = false
     }
 
-    if (id === auth?.user) {
+    if (id === auth?.user.id) {
       className += ' isConnected'
       isDeletable = true
     }
