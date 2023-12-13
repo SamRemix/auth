@@ -8,6 +8,7 @@ import { AuthContext, AuthContextProps } from '../../contexts/AuthContext'
 
 import useToast from '../../hooks/useToast'
 import useSearch from '../../hooks/useSearch'
+import useAuth from '../../hooks/useAuth'
 
 import axiosInstance from '../../utils/axios'
 
@@ -24,6 +25,7 @@ const Admin = () => {
 
   const { pushToast } = useToast()
   const { prefix, setPrefix, search } = useSearch()
+  const { logOut } = useAuth()
 
   // GET USERS
 
@@ -63,6 +65,10 @@ const Admin = () => {
         Authorization: `Bearer ${auth.token}`
       }
     })
+
+    if (id === auth.user.id) {
+      logOut()
+    }
 
     setUsers(users => users.filter(user => user.id !== id))
   }
