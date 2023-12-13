@@ -1,7 +1,8 @@
 @use '../../styles/vars' as v;
 @use '../../styles/mixins' as mix;
 
-@mixin button($border, $focus-border) {
+@mixin button($border, $focus-border, $background-hover: #fff) {
+  background: #fff;
   padding: .5rem 1rem;
   height: v.$input-height;
   border: 2px solid $border;
@@ -12,10 +13,15 @@
   transition: .1s;
 
   &:hover {
+    background: $background-hover;
     border-color: $focus-border;
   }
 }
 
 .primary {
   @include button(#aaa, #666);
+}
+
+.delete {
+  @include button(v.$error, v.$error, v.$error);
 }

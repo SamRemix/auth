@@ -1,12 +1,14 @@
 import './styles.scss'
 
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import { TrashIcon } from '@heroicons/react/24/outline'
 
 import { AuthContext, AuthContextProps } from '../../contexts/AuthContext'
 
 import formatDate from '../../utils/formatDate'
+
+import Modal from '../Modal'
 
 import { UserProps } from '../../@types/types'
 
@@ -16,6 +18,10 @@ type UserDeleteProps = UserProps & {
 
 const User = ({ id, name, email, role, createdAt, deletUser }: UserDeleteProps) => {
   const { auth } = useContext(AuthContext) as AuthContextProps
+
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggleModal = () => setIsOpen(!isOpen)
 
   const checkRole = (role: string, id: string) => {
     let className = 'user-card'
@@ -70,10 +76,19 @@ const User = ({ id, name, email, role, createdAt, deletUser }: UserDeleteProps) 
               className="user-card-footer-delete"
               width="1.5rem"
               strokeWidth={1}
-              onClick={() => deletUser(id)}
+              onClick={toggleModal}
             />
           )}
       </div>
+
+      {isOpen
+        && (
+          <Modal
+            title={`Delete "${name}"`}
+            toggle={toggleModal}
+            deleteAction={() => deletUser(id)}
+          />
+        )}
     </div>
   )
 }

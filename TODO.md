@@ -18,9 +18,6 @@
   - *Modal*
   - *User cards (on delete)*
   - *Album cards (on create & delete)*
-- Confirm when deleting data (open message in modal)
-  - *Album*
-  - *User*
 
 ### USER
 

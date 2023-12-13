@@ -22,17 +22,17 @@
     border-radius: 1rem;
     position: relative;
 
-    &-close {
-      position: absolute;
-      inset: .5rem;
-      cursor: pointer;
+    &-title {
+      font-weight: 700;
+      font-size: 200%;
     }
 
-    &-title {
-      font-family: 'Playfair Display';
-      font-weight: 700;
-      font-size: 300%;
-      font-style: italic;
+    .delete-confirmation {
+      @include mix.flex-column-center-gap(2rem);
+
+      &-buttons {
+        @include mix.flex-gap(2rem);
+      }
     }
   }
 }

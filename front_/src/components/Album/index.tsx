@@ -1,6 +1,6 @@
 import './styles.scss'
 
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { TrashIcon } from '@heroicons/react/24/outline'
@@ -8,6 +8,8 @@ import { TrashIcon } from '@heroicons/react/24/outline'
 import { AuthContext, AuthContextProps } from '../../contexts/AuthContext'
 
 import formatDate from '../../utils/formatDate'
+
+import Modal from '../Modal'
 
 import { AlbumProps } from '../../@types/types'
 
@@ -17,6 +19,10 @@ type AlbumDeleteProps = AlbumProps & {
 
 const Album = ({ id, title, release, cover, deleteAlbum }: AlbumDeleteProps) => {
   const { auth } = useContext(AuthContext) as AuthContextProps
+
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggleModal = () => setIsOpen(!isOpen)
 
   return (
     <div className="album-card">
@@ -40,11 +46,20 @@ const Album = ({ id, title, release, cover, deleteAlbum }: AlbumDeleteProps) => 
                 className="album-card-footer-delete"
                 width="1.5rem"
                 strokeWidth={1}
-                onClick={() => deleteAlbum(id)}
+                onClick={toggleModal}
               />
             )}
         </div>
       </div>
+
+      {isOpen
+        && (
+          <Modal
+            title={`Delete "${title}"`}
+            toggle={toggleModal}
+            deleteAction={() => deleteAlbum(id)}
+          />
+        )}
     </div>
   )
 }
