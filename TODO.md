@@ -6,9 +6,8 @@
 
 - Responsive
 - Home page
-  - *Show latest edits (album review, articles)*
-- Settings page
-  - *Switch dark/light theme*
+  - *Show latest reviews & articles*
+- Switch dark/light theme
 - About page
   - *Me*
   - *Project*
@@ -22,15 +21,16 @@
 
 ### USER
 
-- SUPER_ADMIN can give or remove ADMIN permission to other users
+- Search bar in admin page
 - Update (fix update album first)
+  - *SUPER_ADMIN can update users role (ADMIN & USER)*
   - *Name & email form*
   - *Password form*
 
 ### ALBUM
 
-- Single album review & spec
-- Update cover (store cover in database first)
+- Single album review & spec (fix update album first)
+- Update cover (fix update album & store cover in database first)
 
 #### *FIX*
 
