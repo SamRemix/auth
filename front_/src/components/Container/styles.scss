@@ -7,6 +7,15 @@
   min-height: calc(100vh - ((v.$root-padding + v.$header-height) * 2));
   @include mix.flex-column-gap(4rem);
 
+  &.settings {
+    margin-left: 14rem;
+    width: calc(100% - 14rem);
+
+    .page-title {
+      text-align: left;
+    }
+  }
+
   &.isJustify {
     justify-content: center;
     align-items: center;

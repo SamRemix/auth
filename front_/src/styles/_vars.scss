@@ -25,8 +25,24 @@ $input-height: 2.5rem;
 
 // AFFECTS:
 // #root
+// .navbar
 // .modal
-$root-background: #f1eee0;
+$root-background: var(--background);
+
+$root-color: #1b1b1b;
+
+$box1-background: #f7e991;
+$box2-background: #dfa9a7;
+$box3-background: #fcddb0;
+
+$button-background: #fff;
+$input-background: #fff;
+
+$red: #FF6058;
+$red-background: #f1eee0;
+
+$blue: #1D8AB1;
+$blue-background: #e0eef1;
 
 // AFFECTS:
 // color
@@ -35,7 +51,7 @@ $black: #1b1b1b;
 
 // AFFECTS:
 // #root::before
-$red: #FF6058;
+$primary: var(--primary);
 
 // AFFECTS:
 // .toast-error

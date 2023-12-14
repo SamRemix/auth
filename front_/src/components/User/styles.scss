@@ -3,21 +3,21 @@
 
 .user-card {
   padding: 1rem;
-  background: #e8e4d2;
+  background: v.$box3-background;
   border: 1px solid v.$black;
   border-radius: .5rem;
   @include mix.flex-column-gap(2rem);
 
   &.super {
-    background: #f7e991;
+    background: v.$box1-background;
   }
 
   &.admin {
-    background: #ff9c97;
+    background: v.$box2-background;
   }
 
   &.isConnected {
-    box-shadow: 0 0 0 6px v.$red;
+    box-shadow: 0 0 0 6px v.$primary;
   }
 
   &-header,

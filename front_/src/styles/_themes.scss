@@ -1,0 +1,28 @@
+@use 'sass:color';
+
+@mixin theme-colors($theme) {
+  @if $theme =='Red' {
+    --primary: #FF6058;
+    --background: #f1eee0;
+  }
+
+  @else if $theme =='Blue' {
+    --primary: #1D8AB1;
+    --background: #e0eef1;
+  }
+}
+
+
+
+:root {
+  // default theme
+  @include theme-colors('Red');
+
+  &[theme='Red'] {
+    @include theme-colors('Red');
+  }
+
+  &[theme='Blue'] {
+    @include theme-colors('Blue');
+  }
+}

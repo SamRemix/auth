@@ -1,10 +1,10 @@
 @use '../../styles/vars' as v;
 @use '../../styles/mixins' as mix;
 
-@mixin button($border, $focus-border, $background-hover: #fff) {
-  background: #fff;
+@mixin button($border, $focus-border, $background-hover: v.$button-background) {
   padding: .5rem 1rem;
   height: v.$input-height;
+  background: v.$button-background;
   border: 2px solid $border;
   border-radius: .5rem;
   font-weight: 500;

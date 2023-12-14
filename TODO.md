@@ -7,7 +7,6 @@
 - Responsive
 - Home page
   - *Show latest reviews & articles*
-- Switch dark/light theme
 - About page
   - *Me*
   - *Project*
@@ -48,6 +47,7 @@
 
 - Switch langage
   - *fr/en*
+- More themes (dark & light)
 
 ### ALBUM
 

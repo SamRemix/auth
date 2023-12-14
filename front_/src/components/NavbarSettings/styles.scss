@@ -1,0 +1,41 @@
+@use '../../styles/vars' as v;
+@use '../../styles/mixins' as mix;
+
+.navbar-settings {
+  padding: .5rem;
+  width: 14rem;
+  background: v.$root-background;
+  box-shadow: 0 2px 4px rgba($color: #000, $alpha: .4);
+  border-radius: 1rem;
+  position: fixed;
+  inset: calc(v.$header-inset + v.$header-height + 2rem) auto auto calc(v.$header-inset);
+  z-index: 3;
+
+  &-container {
+    @include mix.flex-column-gap(.5rem);
+
+    .link {
+      padding: .5rem 1rem;
+      border-radius: .5rem;
+      font-weight: 500;
+      @include mix.flex-center-gap(.5rem);
+      justify-content: start;
+      position: relative;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: .1s;
+
+      &:hover {
+        background: v.$box3-background;
+      }
+
+      &.active {
+
+        >p,
+        >.icon {
+          color: v.$primary;
+        }
+      }
+    }
+  }
+}

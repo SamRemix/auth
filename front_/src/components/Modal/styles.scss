@@ -5,10 +5,10 @@
   @include mix.flex-center;
   position: fixed;
   inset: 0;
-  z-index: 4;
+  z-index: 20;
 
   .backdrop {
-    background: rgba($color: v.$black, $alpha: .7);
+    background: rgba($color: #000, $alpha: .6);
     position: fixed;
     inset: 0;
     cursor: pointer;

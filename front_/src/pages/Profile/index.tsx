@@ -1,7 +1,6 @@
 import transition from '../../transition/transition'
 
 import { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 
 import { AuthContext, AuthContextProps } from '../../contexts/AuthContext'
 
@@ -14,8 +13,6 @@ import Container from '../../components/Container'
 import { UserProps } from '../../@types/types'
 
 const Profile = () => {
-  let { id } = useParams()
-
   const { auth } = useContext(AuthContext) as AuthContextProps
 
   const [user, setUser] = useState({} as UserProps)
@@ -29,7 +26,7 @@ const Profile = () => {
 
     const getUser = async () => {
       try {
-        const { data } = await axiosInstance.get(`/users/${id}`, {
+        const { data } = await axiosInstance.get(`/users/${auth.user.id}`, {
           signal: controller.signal,
           headers: {
             Authorization: `Bearer ${auth.token}`
@@ -53,7 +50,7 @@ const Profile = () => {
   }, [])
 
   return (
-    <Container title={user.name} justifyContent={true}>
+    <Container title="Profile" settingsPage={true}>
       <p>{user.email}</p>
     </Container>
   )

@@ -3,7 +3,7 @@
 
 .album-card {
   padding: 1rem;
-  background: #e8e4d2;
+  background: v.$box1-background;
   border: 1px solid #aaa;
   border-radius: 1rem;
   @include mix.flex-gap(2rem);

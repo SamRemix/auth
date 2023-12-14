@@ -12,8 +12,8 @@
   align-items: center;
   justify-content: space-between;
   position: fixed;
-  inset: calc(v.$header-inset) auto auto calc(v.$header-inset);
-  z-index: 4;
+  inset: v.$header-inset auto auto v.$header-inset;
+  z-index: 10;
 
   &-container {
     @include mix.flex-gap(2rem);
@@ -23,12 +23,30 @@
       background: v.$root-background;
       box-shadow: 0 2px 4px rgba($color: #000, $alpha: .4);
       border-radius: 1rem;
-      @include mix.flex-column-gap(.5rem);
+      @include mix.flex-column-gap(1rem);
       position: absolute;
       top: calc(100% - .25rem);
+      cursor: default;
 
-      .link {
-        justify-content: start !important;
+      &-user,
+      &-settings {
+        .link {
+          justify-content: start !important;
+        }
+      }
+
+      &-user {
+        @include mix.flex-column-gap(.5rem);
+        position: relative;
+
+        &::before {
+          content: '';
+          width: 80%;
+          height: 1px;
+          background: #444;
+          position: absolute;
+          inset: auto 10% -.5rem auto;
+        }
       }
     }
 
@@ -43,14 +61,14 @@
       transition: .1s;
 
       &:hover {
-        background: #FCDDB0;
+        background: v.$box3-background;
       }
 
       &.active {
 
         >p,
         >.icon {
-          color: v.$red;
+          color: v.$primary;
         }
       }
     }

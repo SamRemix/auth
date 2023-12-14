@@ -10,6 +10,7 @@ import {
   ChevronDownIcon,
   LockClosedIcon,
   ArrowRightOnRectangleIcon,
+  Cog6ToothIcon,
   UserPlusIcon,
   ArrowLeftOnRectangleIcon
 } from '@heroicons/react/24/outline'
@@ -79,25 +80,29 @@ const Navbar = () => {
 
               {isOpen && (
                 <div className="navbar-container-auth">
-                  <NavLink to={`/user/${auth.user.id}`} className="link">
-                    <UserIcon {...iconAttributs} />
+                  <div className="navbar-container-auth-user">
+                    {auth.isAdmin
+                      && (
+                        <NavLink to="/admin" className="link">
+                          <LockClosedIcon {...iconAttributs} />
 
-                    <p>Profile</p>
-                  </NavLink>
+                          <p>Admin</p>
+                        </NavLink>
+                      )}
 
-                  {auth.isAdmin
-                    && (
-                      <NavLink to="/admin" className="link">
-                        <LockClosedIcon {...iconAttributs} />
+                    <div className="link" onClick={handleLogout}>
+                      <ArrowRightOnRectangleIcon {...iconAttributs} />
 
-                        <p>Admin</p>
-                      </NavLink>
-                    )}
+                      <p>Log out</p>
+                    </div>
+                  </div>
 
-                  <div className="link" onClick={handleLogout}>
-                    <ArrowRightOnRectangleIcon {...iconAttributs} />
+                  <div className="navbar-container-auth-settings">
+                    <NavLink to="/settings/profile" className="link">
+                      <Cog6ToothIcon {...iconAttributs} />
 
-                    <p>Log out</p>
+                      <p>Settings</p>
+                    </NavLink>
                   </div>
                 </div>
               )}
@@ -107,13 +112,13 @@ const Navbar = () => {
         {!auth?.token
           && (
             <>
-              <NavLink to="signup" className="link">
+              <NavLink to="/signup" className="link">
                 <UserPlusIcon {...iconAttributs} />
 
                 <p>Sign up</p>
               </NavLink>
 
-              <NavLink to="login" className="link">
+              <NavLink to="/login" className="link">
                 <ArrowLeftOnRectangleIcon {...iconAttributs} />
 
                 <p>Log in</p>
