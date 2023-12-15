@@ -13,7 +13,7 @@ type InputProps = {
   type?: string
   label: string
   value?: string
-  name: string
+  name?: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   autoFocus?: boolean
   file?: string
@@ -34,7 +34,7 @@ const Input = ({
 
   const defaultAttributs = {
     className: 'input',
-    id: name,
+    id: name || 'input',
     name,
     onChange,
     autoFocus,

@@ -10,7 +10,6 @@ const SearchBar = ({ label, prefix, setPrefix }: SearchBarProps) => (
   <Input
     type="search"
     label={label}
-    name="search"
     value={prefix}
     onChange={({ target }) => (
       setPrefix(target.value)
