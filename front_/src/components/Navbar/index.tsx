@@ -28,7 +28,7 @@ const Navbar = () => {
 
   const { logOut } = useAuth()
 
-  const isActiveLink = ['/admin', '/user'].some(path => (
+  const isActiveLink = ['/admin', '/settings'].some(path => (
     pathname.includes(path)
   ))
 
