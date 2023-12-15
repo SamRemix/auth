@@ -9,14 +9,17 @@ import App from './App'
 
 import AuthProvider from './contexts/AuthContext'
 import ToastProvider from './contexts/ToastContext'
+import ThemeProvider from './contexts/ThemeContext'
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <AuthProvider>
       <ToastProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <ThemeProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ThemeProvider>
       </ToastProvider>
     </AuthProvider>
   </StrictMode>

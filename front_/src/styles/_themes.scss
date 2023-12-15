@@ -4,11 +4,13 @@
   @if $theme =='Red' {
     --primary: #FF6058;
     --background: #f1eee0;
+    --primary-color: #FF6058;
   }
 
   @else if $theme =='Blue' {
     --primary: #1D8AB1;
     --background: #e0eef1;
+    --primary-color: #1D8AB1;
   }
 }
 

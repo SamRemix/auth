@@ -98,7 +98,7 @@ const Navbar = () => {
                   </div>
 
                   <div className="navbar-container-auth-settings">
-                    <NavLink to="/settings/profile" className="link">
+                    <NavLink to="/settings/profile" className={`${pathname.includes('/settings') ? 'link active' : 'link'}`}>
                       <Cog6ToothIcon {...iconAttributs} />
 
                       <p>Settings</p>

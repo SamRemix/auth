@@ -2,14 +2,14 @@ import './styles.scss'
 
 import transition from '../../transition/transition'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+
+import { ThemeContext } from '../../contexts/ThemeContext'
 
 import Container from '../../components/Container'
 
-import useTheme from '../../hooks/useTheme'
-
 const Profile = () => {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useContext(ThemeContext)
 
   const [selected, setSelected] = useState(theme)
 

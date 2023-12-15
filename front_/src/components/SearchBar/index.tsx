@@ -15,6 +15,7 @@ const SearchBar = ({ label, prefix, setPrefix }: SearchBarProps) => (
     onChange={({ target }) => (
       setPrefix(target.value)
     )}
+    autoFocus={true}
   />
 )
 
