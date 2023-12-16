@@ -20,20 +20,18 @@
 
 ### USER
 
-- Update (fix update album first)
+- Update
   - *SUPER_ADMIN can update users role (ADMIN & USER)*
   - *Name & email form*
   - *Password form*
 
 ### ALBUM
 
-- Single album review & spec (fix update album first)
-- Update cover (fix update album & store cover in database first)
+- Single album review & spec
+- Update cover (store cover in database first)
 
 #### *FIX*
 
-- On submit update, the update request is made even if the values have not been modified
-  - *At "src/pages/Album"*
 - Find a way to store cover in database instead of local directory
   - *Base64 ?*
 

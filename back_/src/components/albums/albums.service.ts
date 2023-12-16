@@ -69,10 +69,6 @@ class AlbumsService {
     try {
       const currentAlbum = await findAlbum(id)
 
-      if ((title === currentAlbum.title) && (release === currentAlbum.release)) {
-        return
-      }
-
       if (title === currentAlbum.title || !title) {
         newAlbum.title = currentAlbum.title
       } else {
@@ -94,7 +90,7 @@ class AlbumsService {
 
       return {
         album,
-        message: `You updated ${currentAlbum.title}`
+        message: 'Album updated successfully!'
       }
     } catch ({ message }: any) {
       throw new Error(message)

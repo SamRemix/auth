@@ -17,7 +17,6 @@ type InputProps = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   autoFocus?: boolean
   file?: string
-  fileType?: string
 }
 
 const Input = ({
@@ -27,8 +26,7 @@ const Input = ({
   name,
   onChange,
   autoFocus = false,
-  file,
-  fileType
+  file
 }: InputProps) => {
   const [isDisplay, setIsDisplay] = useState(false)
 
@@ -104,7 +102,7 @@ const Input = ({
             </div>
           </label>
 
-          <input value={value} accept={fileType} type="file" {...defaultAttributs} />
+          <input accept="image/png, image/jpeg" type="file" {...defaultAttributs} />
         </div>
       )}
 
@@ -118,7 +116,6 @@ const Input = ({
             {...defaultAttributs}
           />
         </label>
-
       )}
     </>
   )

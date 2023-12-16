@@ -173,7 +173,6 @@ const Reviews = () => {
                 name="cover"
                 onChange={setState}
                 file={newAlbum.cover?.name}
-                fileType="image/png, image/jpeg"
               />
 
               <Button>Add album</Button>
