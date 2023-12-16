@@ -15,15 +15,19 @@
       cursor: pointer;
       transition: box-shadow .2s;
 
+      @mixin gradient($theme-color) {
+        background: linear-gradient(45deg, v.$root-background 50%, $theme-color 50%);
+      }
+
       &.Red {
-        background: linear-gradient(45deg, v.$red-background 50%, v.$red 50%);
+        @include gradient(v.$red);
       }
 
       &.Blue {
-        background: linear-gradient(45deg, v.$blue-background 50%, v.$blue 50%);
+        @include gradient(v.$blue);
       }
 
-      &.test {
+      &.current {
         box-shadow: inset 0 0 0 6px v.$primary;
       }
     }

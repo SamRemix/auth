@@ -3,17 +3,17 @@
 
 .user-card {
   padding: 1rem;
-  background: v.$box3-background;
-  border: 1px solid v.$black;
+  background: v.$card-3-background;
+  border: 1px solid #aaa;
   border-radius: .5rem;
   @include mix.flex-column-gap(2rem);
 
   &.super {
-    background: v.$box1-background;
+    background: v.$card-1-background;
   }
 
   &.admin {
-    background: v.$box2-background;
+    background: v.$card-2-background;
   }
 
   &.isConnected {
@@ -37,7 +37,7 @@
       content: '';
       width: 100%;
       height: 1px;
-      background: v.$black;
+      background: #000;
       position: absolute;
       inset: auto 0 -1rem;
     }

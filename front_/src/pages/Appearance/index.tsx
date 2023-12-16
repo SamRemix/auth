@@ -30,7 +30,7 @@ const Profile = () => {
           <div key={id} className="theme">
             <p>{name}</p>
             <div
-              className={`theme-colors ${theme} ${selected === theme ? 'test' : ''}`}
+              className={`theme-colors ${theme} ${selected === theme ? 'current' : ''}`}
               onClick={() => {
                 setSelected(theme)
                 setTheme(theme)

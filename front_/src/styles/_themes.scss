@@ -1,20 +1,16 @@
-@use 'sass:color';
-
 @mixin theme-colors($theme) {
   @if $theme =='Red' {
-    --primary: #FF6058;
-    --background: #f1eee0;
-    --primary-color: #FF6058;
+    --root-background: #fff;
+    --primary: #ff6058;
+    --active-link-background: #ffbaba;
   }
 
   @else if $theme =='Blue' {
-    --primary: #1D8AB1;
-    --background: #e0eef1;
-    --primary-color: #1D8AB1;
+    --root-background: #fff;
+    --primary: #1d8ab1;
+    --active-link-background: #babaff;
   }
 }
-
-
 
 :root {
   // default theme

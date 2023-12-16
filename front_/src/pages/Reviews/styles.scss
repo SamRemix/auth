@@ -6,5 +6,6 @@
 }
 
 .album-reviews-container {
-  @include mix.flex-column-gap(1rem);
+  @include mix.flex-column-gap(2rem);
+  align-items: center;
 }

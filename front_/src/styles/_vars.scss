@@ -19,45 +19,44 @@ $header-height: 4rem;
 $header-inset: calc($root-padding / 8);
 
 // AFFECTS:
-// .input
-// button
-$input-height: 2.5rem;
-
-// AFFECTS:
 // #root
 // .navbar
 // .modal
-$root-background: var(--background);
-
+$root-background: var(--root-background);
 $root-color: #1b1b1b;
-
-$box1-background: #f7e991;
-$box2-background: #dfa9a7;
-$box3-background: #fcddb0;
-
-$button-background: #fff;
-$input-background: #fff;
-
-$red: #FF6058;
-$red-background: #f1eee0;
-
-$blue: #1D8AB1;
-$blue-background: #e0eef1;
-
-// AFFECTS:
-// color
-// .backdrop (modal)
-$black: #1b1b1b;
 
 // AFFECTS:
 // #root::before
 $primary: var(--primary);
-$primary-color: var(--primary-color);
+
+// AFFECTS:
+// .user-card (SUPER_ADMIN)
+$card-1-background: #f7e991;
+// AFFECTS:
+// .user-card (ADMIN)
+$card-2-background: #dfa9a7;
+// AFFECTS:
+// .user-card (USER)
+// .album-card
+$card-3-background: #d7d7d7;
+
+$hover-link-background: #d7d7d7;
+$active-link-background: var(--active-link-background);
+
+// AFFECTS:
+// .input
+// button
+$input-height: 2.5rem;
+$button-background: #fff;
+$input-background: #fff;
+
+// AFFECTS:
+// Appearance page
+$red: #ff6058;
+$blue: #1d8ab1;
 
 // AFFECTS:
 // .toast-error
 $error: #ff3e00;
 
-// AFFECTS:
-// .navbar .link
-$green: #05AB61;
+// $green: #05AB61;

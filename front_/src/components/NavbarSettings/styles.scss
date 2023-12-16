@@ -15,28 +15,8 @@
     @include mix.flex-column-gap(.5rem);
 
     .link {
-      padding: .5rem 1rem;
-      border-radius: .5rem;
-      font-weight: 500;
-      @include mix.flex-center-gap(.5rem);
+      @include mix.link;
       justify-content: start;
-      position: relative;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: .1s;
-
-      &:hover {
-        background: v.$box3-background;
-      }
-
-      &.active {
-        background: v.$box3-background;
-
-        >p,
-        >.icon {
-          color: v.$primary-color;
-        }
-      }
     }
   }
 }

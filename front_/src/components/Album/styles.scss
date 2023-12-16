@@ -2,8 +2,10 @@
 @use '../../styles/mixins' as mix;
 
 .album-card {
+  width: 100%;
+  max-width: 60rem;
   padding: 1rem;
-  background: v.$box1-background;
+  background: v.$card-3-background;
   border: 1px solid #aaa;
   border-radius: 1rem;
   @include mix.flex-gap(2rem);

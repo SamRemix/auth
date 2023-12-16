@@ -1,3 +1,5 @@
+@use './vars' as v;
+
 // FLEX ROW
 @mixin flex-center {
   display: flex;
@@ -42,4 +44,24 @@
   justify-content: center;
   flex-direction: column;
   gap: $gap;
+}
+
+// OTHERS
+@mixin link {
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+  font-weight: 500;
+  @include flex-center-gap(.5rem);
+  position: relative;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: .1s;
+
+  &:hover {
+    background: v.$hover-link-background;
+  }
+
+  &.active {
+    background: v.$active-link-background;
+  }
 }
