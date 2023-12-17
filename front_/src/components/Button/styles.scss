@@ -12,7 +12,11 @@
   cursor: pointer;
   transition: .1s;
 
-  &:hover {
+  &:disabled {
+    cursor: default;
+  }
+
+  &:hover:not(:disabled) {
     background: $background-hover;
     border-color: $focus-border;
   }

@@ -2,13 +2,13 @@ import './styles.scss'
 
 type ButtonProps = {
   type?: string
+  disabled?: boolean
   onClick?: () => void
   children?: React.ReactNode
-  animate?: object
 }
 
-const Button = ({ type = 'primary', onClick, children }: ButtonProps) => (
-  <button className={type} onClick={onClick}>
+const Button = ({ type = 'primary', onClick, disabled, children }: ButtonProps) => (
+  <button className={type} disabled={disabled} onClick={onClick}>
     {children}
   </button>
 )

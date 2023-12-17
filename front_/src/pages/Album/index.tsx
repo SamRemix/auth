@@ -73,6 +73,7 @@ const Album = () => {
       })
 
       setAlbum(data.album)
+      setUpdatedAlbum({})
 
       toggleModal()
 
@@ -113,7 +114,7 @@ const Album = () => {
                 onChange={setState}
               />
 
-              <Button>Update album</Button>
+              <Button disabled={!Object.keys(updatedAlbum).length}>Update album</Button>
             </form>
           </Modal>
         )}
